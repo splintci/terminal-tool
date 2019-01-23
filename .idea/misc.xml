@@ -39,7 +39,9 @@
     </properties>
   </component>
   <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+    <writeAnnotations>
+      <writeAnnotation name="org.kohsuke.args4j.Option" />
+    </writeAnnotations>
   </component>
   <component name="ProjectKey">
     <option name="state" value="project://e79810c8-c5c8-43b1-b19c-90c1f4095425" />
