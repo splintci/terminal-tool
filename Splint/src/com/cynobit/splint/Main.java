@@ -23,8 +23,8 @@ public class Main {
     @Option(name = "-i", aliases = "--install", usage = "Installs a splint package.")
     private String packageIdentifier;
 
-    @Option(name = "-p", aliases = {"--patch", "--install-sdk"}, usage = "Installs or Patch your current Code-Igniter distribution")
-    private boolean patch;
+    @Option(name = "-n", aliases = {"--no-patch", "--no-install-sdk"}, usage = "Installs or Patch your current Code-Igniter distribution")
+    private boolean dontPatch = false;
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Argument
@@ -43,6 +43,7 @@ public class Main {
             instance.processArguments(args);
         } catch (IOException e) {
             System.out.println("I/O Exception encountered");
+            System.exit(ExitCodes.IO_EXCEPTION);
         }
         System.exit(0);
     }
@@ -58,33 +59,35 @@ public class Main {
             // >_splint install vendor/package .../... .../...
             if (specialArgs.size() > 0) {
                 if (specialArgs.get(0).equals("install")) {
-                    if (specialArgs.size() == 2 && specialArgs.get(1).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
-                        SplintCore.installPackage(specialArgs.get(1));
-                    } else {
-                        List<String> packages = new ArrayList<>();
-                        for (int x = 1; x < specialArgs.size(); x++) {
-                            if (specialArgs.get(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
-                                packages.add(specialArgs.get(x));
-                            } else {
-                                System.out.println("Invalid package name: " + specialArgs.get(x));
-                                System.exit(3);
-                            }
+                    List<String> packages = new ArrayList<>();
+                    for (int x = 1; x < specialArgs.size(); x++) {
+                        if (specialArgs.get(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                            packages.add(specialArgs.get(x));
+                        } else {
+                            System.out.println("Invalid package name: " + specialArgs.get(x));
+                            System.exit(ExitCodes.INVALID_PACKAGE_NAME);
                         }
-                        SplintCore.installPackages(packages);
                     }
+                    SplintCore.installPackages(packages);
                 }
+
             }
             // >_splint -i vendor/package .../... .../...
             if (packageIdentifier != null && packageIdentifier.matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
-                SplintCore.installPackage(packageIdentifier);
-                for (int x = 0; x < specialArgs.size(); x++) {
-                    if (specialArgs.get(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
-                        SplintCore.installPackage(specialArgs.get(x));
+                List<String> packages = new ArrayList<>();
+                packages.add(packageIdentifier);
+                for (String specialArg : specialArgs) {
+                    if (specialArg.matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                        packages.add(specialArg);
                     } else {
-                        System.out.println("Invalid package name: " + specialArgs.get(x));
-                        System.exit(3);
+                        System.out.println("Invalid package name: " + specialArg);
+                        System.exit(ExitCodes.INVALID_PACKAGE_NAME);
                     }
                 }
+                SplintCore.installPackages(packages);
+            } else {
+                System.out.println("Invalid package name: " + packageIdentifier);
+                System.exit(ExitCodes.INVALID_PACKAGE_NAME);
             }
         } catch (CmdLineException e) {
             System.out.println("Unable to parse command line arguments");

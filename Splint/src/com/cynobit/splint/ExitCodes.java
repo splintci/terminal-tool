@@ -1,8 +1,11 @@
 package com.cynobit.splint;
 
 /**
- * Created by Francis on 1/22/2019.
+ * (c) CynoBit 2019
+ * Created by Francis Ilechukwu 1/22/2019.
  */
-public class ExitCodes {
+class ExitCodes {
     static final int BAD_ARGUMENTS = 2;
+    static final int  IO_EXCEPTION = 3;
+    static final int INVALID_PACKAGE_NAME = 4;
 }

@@ -8,14 +8,15 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("AnonymousHasLambdaAlternative")
 public class CloudManager {
 
-    private static final String USER_AGENT = Main.APP_NAME;
+    public static final String USER_AGENT = Main.APP_NAME;
     //private static final String URL = "https://splint.cynobit.com/";
     private static final String URL = "http://127.0.0.1/splint.cynobit.com/";
-    private static final String API = URL + "index.php/SplintClient/";
+    public static final String API = URL + "index.php/SplintClient/";
     private static volatile CloudManager cloudManager;
 
     private CloudManager() {
@@ -31,6 +32,20 @@ public class CloudManager {
             }
         }
         return cloudManager;
+    }
+
+    public void getLatestVersion(String identifier, CloudResponseListener listener) {
+        String request = API + "getLatestVersionId";
+        ArrayList<Pair<String, String>> parameters = new ArrayList<>();
+        parameters.add(new Pair<>("identifier", identifier));
+        fetch(request, parameters, listener);
+    }
+
+    public void requestPackages(List<String> packages, CloudResponseListener listener) {
+        String request = API + "requestPackages";
+        ArrayList<Pair<String, String>> parameters = new ArrayList<>();
+        parameters.add(new Pair<>("identifiers", String.join(",", packages)));
+        fetch(request, parameters, listener);
     }
 
     private void fetch(String url, final CloudResponseListener listener) {
