@@ -2,7 +2,6 @@ package com.cynobit.splint;
 
 import com.cynobit.splint.models.CloudManager;
 import com.cynobit.splint.models.DataSource;
-import javafx.util.Pair;
 import net.lingala.zip4j.core.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,8 +12,6 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 /**
  * (c) CynoBit 2019
@@ -25,7 +22,7 @@ class SplintCore {
     private static final CloudManager cloudManager = CloudManager.getInstance();
     private static final DataSource dataSource = new DataSource(Main.appRoot);
 
-    static void installPackages(List<String> packageList) {
+    static List<String> installPackages(List<String> packageList) {
         List<String> toDownload = new ArrayList<>();
         List<String> toInstall = new ArrayList<>();
         List<String> noInstall = new ArrayList<>();
@@ -107,8 +104,50 @@ class SplintCore {
                 System.exit(ExitCodes.ERROR_INSTALL_PACKAGE);
             }
         }
-        System.out.println("Done Installing Packages.");
+        return toInstall;
     }
+
+    static List<String> getDependencies(List<String> packages) {
+        List<String> dependencies = new ArrayList<>();
+        System.out.println("Compiling list of dependencies");
+        for (String _package : packages) {
+            File file = new File(System.getProperty("user.dir") + "/application/splints/" + _package + "/splint.json");
+            if (!file.exists()) {
+                System.err.println("package: " + _package + " has no descriptor.");
+                System.exit(ExitCodes.NO_DESCRIPTOR);
+            }
+            try {
+                JSONObject descriptor;
+                FileReader fileReader = new FileReader(file);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                String line;
+                StringBuilder builder = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null) {
+                    builder.append(line);
+                }
+                bufferedReader.close();
+                if (builder.toString().contains("{") && builder.toString().contains("}")) {
+                    descriptor = new JSONObject(builder.toString());
+                } else {
+                    throw new Exception();
+                }
+                if (descriptor.has("depends-on")) {
+                    JSONArray array = descriptor.getJSONArray("depends-on");
+                    for (int x = 0; x < array.length(); x++) {
+                        if (array.getString(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                            System.out.println("Found dependency: " + array.getString(x));
+                            dependencies.add(array.getString(x));
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Error Reading descriptor for package: " + _package);
+                System.exit(ExitCodes.DESCRIPTOR_READ_ERROR);
+            }
+        }
+        return dependencies;
+    }
+
 
     private static boolean installPackage(String identifier) {
         System.out.println(String.format("Installing package: %s ...", identifier));

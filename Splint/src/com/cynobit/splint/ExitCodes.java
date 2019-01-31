@@ -14,4 +14,6 @@ class ExitCodes {
     static final int TECHNICAL_ISSUE = 8;
     static final int ERROR_INSTALL_PACKAGE = 9;
     static final int EXTRACTION_ERROR = 10;
+    static final int NO_DESCRIPTOR = 11;
+    static final int DESCRIPTOR_READ_ERROR = 12;
 }

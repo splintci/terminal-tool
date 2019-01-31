@@ -73,7 +73,11 @@ public class Main {
                             System.exit(ExitCodes.INVALID_PACKAGE_NAME);
                         }
                     }
-                    SplintCore.installPackages(packages);
+                    List<String> dependencies = SplintCore.getDependencies(SplintCore.installPackages(packages));
+                    while (dependencies.size() > 0) {
+                        dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
+                    }
+                    System.out.println("Done Installing Packages.");
                 }
 
             }
@@ -90,7 +94,8 @@ public class Main {
                             System.exit(ExitCodes.INVALID_PACKAGE_NAME);
                         }
                     }
-                    SplintCore.installPackages(packages);
+                    // TODO: dependencies.
+                    SplintCore.getDependencies(SplintCore.installPackages(packages));
                 } else {
                     System.out.println("Invalid package name: " + packageIdentifier);
                     System.exit(ExitCodes.INVALID_PACKAGE_NAME);
