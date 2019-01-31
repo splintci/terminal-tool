@@ -1,0 +1,16 @@
+{
+  "name": "francis94c/ci-preference",
+  "type": "library",
+  "description": "Simple key-value pair library for saving dynamic persistent config values.",
+  "tags": ["preference"],
+  "page": "https://github.com/francis94c/ci-preference",
+  "authors": [
+    {
+      "name": "Francis Ilechukwu",
+      "email": "francis94c@gmail.com",
+      "page": "about.me/francisilechukwu",
+      "role": "Developer"
+    }
+  ],
+  "php": ">=5.3.0"
+}

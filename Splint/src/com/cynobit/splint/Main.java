@@ -59,6 +59,11 @@ public class Main {
             // >_splint install vendor/package .../... .../...
             if (specialArgs.size() > 0) {
                 if (specialArgs.get(0).equals("install")) {
+                    File dir = new File(System.getProperty("user.dir") + "/application");
+                    if (!dir.isDirectory()) {
+                        System.out.println("Could not locate application folder, pls run this command in a code igniter root or one with the application folder");
+                        System.exit(ExitCodes.NO_APPLICATION_FOLDER);
+                    }
                     List<String> packages = new ArrayList<>();
                     for (int x = 1; x < specialArgs.size(); x++) {
                         if (specialArgs.get(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
@@ -73,21 +78,23 @@ public class Main {
 
             }
             // >_splint -i vendor/package .../... .../...
-            if (packageIdentifier != null && packageIdentifier.matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
-                List<String> packages = new ArrayList<>();
-                packages.add(packageIdentifier);
-                for (String specialArg : specialArgs) {
-                    if (specialArg.matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
-                        packages.add(specialArg);
-                    } else {
-                        System.out.println("Invalid package name: " + specialArg);
-                        System.exit(ExitCodes.INVALID_PACKAGE_NAME);
+            if (packageIdentifier != null) {
+                if (packageIdentifier.matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                    List<String> packages = new ArrayList<>();
+                    packages.add(packageIdentifier);
+                    for (String specialArg : specialArgs) {
+                        if (specialArg.matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                            packages.add(specialArg);
+                        } else {
+                            System.out.println("Invalid package name: " + specialArg);
+                            System.exit(ExitCodes.INVALID_PACKAGE_NAME);
+                        }
                     }
+                    SplintCore.installPackages(packages);
+                } else {
+                    System.out.println("Invalid package name: " + packageIdentifier);
+                    System.exit(ExitCodes.INVALID_PACKAGE_NAME);
                 }
-                SplintCore.installPackages(packages);
-            } else {
-                System.out.println("Invalid package name: " + packageIdentifier);
-                System.exit(ExitCodes.INVALID_PACKAGE_NAME);
             }
         } catch (CmdLineException e) {
             System.out.println("Unable to parse command line arguments");

@@ -25,6 +25,41 @@ public class DataSource {
         return connection != null;
     }
 
+    public boolean updatePackageInfo(String identifier, String version, int versionId, String integrity) {
+        if (getPackageVersionId(identifier) == -1) {
+            try {
+                PreparedStatement statement = connection.prepareStatement(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?);",
+                        Packages.TABLE_NAME,
+                        DBContract.getName(Packages.IDENTIFIER), DBContract.getName(Packages.VERSION),
+                        DBContract.getName(Packages.VERSION_ID), DBContract.getName(Packages.INTEGRITY)));
+                statement.setString(1, identifier);
+                statement.setString(2, version);
+                statement.setInt(3, versionId);
+                statement.setString(4, integrity);
+                statement.executeUpdate();
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                PreparedStatement statement = connection.prepareStatement(String.format("UPDATE %s SET(%s, %s, %s) VALUES (?, ?, ?) WHERE %s = ?;",
+                        Packages.TABLE_NAME,
+                        DBContract.getName(Packages.VERSION), DBContract.getName(Packages.VERSION_ID),
+                        DBContract.getName(Packages.INTEGRITY), DBContract.getName(Packages.IDENTIFIER)));
+                statement.setString(1, version);
+                statement.setInt(2, versionId);
+                statement.setString(3, integrity);
+                statement.setString(4, identifier);
+                statement.executeUpdate();
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     public boolean connect() {
         boolean createTable = false;
         try {

@@ -2,6 +2,8 @@ package com.cynobit.splint;
 
 import com.cynobit.splint.models.CloudManager;
 import com.cynobit.splint.models.DataSource;
+import javafx.util.Pair;
+import net.lingala.zip4j.core.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,28 +13,23 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * (c) CynoBit 2019
  * Created by Francis Ilechukwu 1/22/2019.
  */
-public class SplintCore {
+class SplintCore {
 
     private static final CloudManager cloudManager = CloudManager.getInstance();
+    private static final DataSource dataSource = new DataSource(Main.appRoot);
 
-    /**
-     * @param identifier
-     */
-    private static void installPackage(String identifier) {
-        System.out.println(String.format("Requesting package %s ...", identifier));
-    }
-
-    /**
-     * @param packages
-     */
-    static void installPackages(List<String> packages) {
+    static void installPackages(List<String> packageList) {
         List<String> toDownload = new ArrayList<>();
-        for (String identifier : packages) {
+        List<String> toInstall = new ArrayList<>();
+        List<String> noInstall = new ArrayList<>();
+        for (String identifier : packageList) {
             System.out.println(String.format("Reading cache for package %s ...", identifier));
             if (!packageExistsLocally(identifier)) {
                 toDownload.add(identifier);
@@ -50,8 +47,36 @@ public class SplintCore {
                             for (int x = 0; x < packages.length(); x++) {
                                 if (!downloadPackage(packages.getJSONObject(x).getString("identifier"),
                                         packages.getJSONObject(x).getString("integrity"))) System.exit(6);
+                                if (!dataSource.isConnected()) {
+                                    if (!dataSource.connect()) System.exit(ExitCodes.DB_CONNECTION_ERROR);
+                                }
+                                if (!dataSource.updatePackageInfo(packages.getJSONObject(x).getString("identifier"),
+                                        packages.getJSONObject(x).getString("version"),
+                                        packages.getJSONObject(x).getInt("id"),
+                                        packages.getJSONObject(x).getString("integrity")))
+                                    System.out.println("Error updating cache, continuing...");
+                                toInstall.add(packages.getJSONObject(x).getString("identifier"));
                             }
-
+                            for (String _package : toDownload) {
+                                if (!inList(_package, toInstall)) noInstall.add(_package);
+                            }
+                            for (String _package : packageList) {
+                                if (!inList(_package, noInstall) && !inList(_package, toInstall))
+                                    toInstall.add(_package);
+                            }
+                            if (noInstall.size() > 0) {
+                                System.out.print("The following package(s) could not be found:");
+                                for (String _package : noInstall) {
+                                    System.out.println(_package);
+                                }
+                                System.out.println("Continuing...");
+                            }
+                            synchronized (cloudManager) {
+                                cloudManager.notifyAll();
+                            }
+                        } else {
+                            System.out.println("Splint is currently experiencing technical issues.");
+                            System.exit(ExitCodes.TECHNICAL_ISSUE);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -76,6 +101,40 @@ public class SplintCore {
                 }
             }
         }
+        for (String _package : toInstall) {
+            if (!installPackage(_package)) {
+                System.err.println("Error Installing package: " + _package);
+                System.exit(ExitCodes.ERROR_INSTALL_PACKAGE);
+            }
+        }
+        System.out.println("Done Installing Packages.");
+    }
+
+    private static boolean installPackage(String identifier) {
+        System.out.println(String.format("Installing package: %s ...", identifier));
+        File file = new File(System.getProperty("user.dir") + "/application/splints/" + identifier);
+        if (!file.isDirectory()) {
+            if (!file.mkdirs()) {
+                System.out.println("Could not create the package folder");
+                System.exit(ExitCodes.SPLINT_FOLDER_CREATE_FAILED);
+            }
+        }
+        try {
+            ZipFile zipFile = new ZipFile(Main.appRoot + "packages/" + identifier + ".zip");
+            zipFile.extractAll(System.getProperty("user.dir") + "/application/splints/" + identifier);
+        } catch (Exception e) {
+            System.err.println("Problem extracting package: " + identifier);
+            System.exit(ExitCodes.EXTRACTION_ERROR);
+        }
+        System.out.println("Done Installing package: " + identifier);
+        return true;
+    }
+
+    private static boolean inList(String string, List<String> list) {
+        for (String item : list) {
+            if (item.equals(string)) return true;
+        }
+        return false;
     }
 
     private static String getMD5Checksum(String filename) throws Exception {
@@ -127,7 +186,6 @@ public class SplintCore {
             int x;
             while ((x = in.read(data, 0, 1024)) >= 0) {
                 downloadedFileSize += x;
-                // calculate progress.
                 final int currentProgress = (int) ((((double) downloadedFileSize) / ((double) completeFileSize)) * 100d);
                 System.out.write(("\rDownloading package: " + identifier + " " + currentProgress + "%").getBytes());
                 bout.write(data, 0, x);
@@ -142,11 +200,11 @@ public class SplintCore {
     }
 
     private static boolean packageExistsLocally(String identifier) {
-        DataSource dataSource = new DataSource(Main.appRoot);
-        if (!dataSource.connect()) return false;
+        if (!dataSource.isConnected()) {
+            if (!dataSource.connect()) return false;
+        }
         int localVersion = dataSource.getPackageVersionId(identifier);
         if (localVersion == -1) return false;
-
         final int[] remoteVersionId = {-1};
         cloudManager.getLatestVersion(identifier, new CloudManager.CloudResponseListener() {
             @Override
@@ -156,8 +214,8 @@ public class SplintCore {
                     if (object.getInt("code") == 1) {
                         remoteVersionId[0] = object.getInt("data");
                     }
-                    synchronized (this) {
-                        notifyAll();
+                    synchronized (cloudManager) {
+                        cloudManager.notifyAll();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

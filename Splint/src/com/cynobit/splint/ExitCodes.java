@@ -6,6 +6,12 @@ package com.cynobit.splint;
  */
 class ExitCodes {
     static final int BAD_ARGUMENTS = 2;
-    static final int  IO_EXCEPTION = 3;
+    static final int IO_EXCEPTION = 3;
     static final int INVALID_PACKAGE_NAME = 4;
+    static final int DB_CONNECTION_ERROR = 5;
+    static final int NO_APPLICATION_FOLDER = 6;
+    static final int SPLINT_FOLDER_CREATE_FAILED = 7;
+    static final int TECHNICAL_ISSUE = 8;
+    static final int ERROR_INSTALL_PACKAGE = 9;
+    static final int EXTRACTION_ERROR = 10;
 }
