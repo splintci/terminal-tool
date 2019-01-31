@@ -16,4 +16,6 @@ class ExitCodes {
     static final int EXTRACTION_ERROR = 10;
     static final int NO_DESCRIPTOR = 11;
     static final int DESCRIPTOR_READ_ERROR = 12;
+    static final int PATCHING_ERROR = 13;
+    static final int NO_CORE_FOLDER = 14;
 }

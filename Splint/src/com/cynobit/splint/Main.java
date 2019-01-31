@@ -7,6 +7,8 @@ import org.kohsuke.args4j.Option;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,24 @@ public class Main {
                         dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                     }
                     System.out.println("Done Installing Packages.");
+                    if (!dontPatch) {
+                        System.out.println("Patching application Loader class...");
+                        File coreDir = new File(System.getProperty("user.dir") + "/application/core");
+                        if (!coreDir.isDirectory()) {
+                            System.err.println("'application/core' folder does not exist.");
+                            System.exit(ExitCodes.NO_CORE_FOLDER);
+                        }
+                        try {
+                            if (!new File(coreDir, "MY_Loader.php").exists()) {
+                                Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
+                                        new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath());
+                            }
+                        } catch (Exception e) {
+                            System.err.println("There was an problem patching your Code Igniter distribution");
+                            System.exit(ExitCodes.PATCHING_ERROR);
+                        }
+                        System.out.println("Distribution patching complete.");
+                    }
                 }
 
             }
