@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,12 @@ public class Main {
     @Option(name = "-i", aliases = "--install", usage = "Installs a splint package.")
     private String packageIdentifier;
 
+    @SuppressWarnings("FieldCanBeLocal")
     @Option(name = "-n", aliases = {"--no-patch", "--no-install-sdk"}, usage = "Installs or Patch your current Code-Igniter distribution")
-    private boolean dontPatch = false;
+    private boolean noPatch = false;
+
+    @Option(name = "-f", aliases = {"--force-patch"}, usage = "Forcefully patches your distribution even if the Loader class already exists.")
+    private boolean forcePatch = false;
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Argument
@@ -80,26 +85,7 @@ public class Main {
                         dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                     }
                     System.out.println("Done Installing Packages.");
-                    if (!dontPatch) {
-                        System.out.println("Patching application Loader class...");
-                        File coreDir = new File(System.getProperty("user.dir") + "/application/core");
-                        if (!coreDir.isDirectory()) {
-                            System.err.println("'application/core' folder does not exist.");
-                            System.exit(ExitCodes.NO_CORE_FOLDER);
-                        }
-                        try {
-                            if (!new File(coreDir, "MY_Loader.php").exists()) {
-                                Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
-                                        new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath());
-                            }
-                        } catch (Exception e) {
-                            System.err.println("There was an problem patching your Code Igniter distribution");
-                            System.exit(ExitCodes.PATCHING_ERROR);
-                        }
-                        System.out.println("Distribution patching complete.");
-                    }
                 }
-
             }
             // >_splint -i vendor/package .../... .../...
             if (packageIdentifier != null) {
@@ -115,11 +101,38 @@ public class Main {
                         }
                     }
                     // TODO: dependencies.
-                    SplintCore.getDependencies(SplintCore.installPackages(packages));
+                    List<String> dependencies = SplintCore.getDependencies(SplintCore.installPackages(packages));
+                    while (dependencies.size() > 0) {
+                        dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
+                    }
+                    System.out.println("Done Installing Packages.");
+
                 } else {
                     System.out.println("Invalid package name: " + packageIdentifier);
                     System.exit(ExitCodes.INVALID_PACKAGE_NAME);
                 }
+            }
+            if (!noPatch) {
+                System.out.println("Patching application Loader class...");
+                File coreDir = new File(System.getProperty("user.dir") + "/application/core");
+                if (!coreDir.isDirectory()) {
+                    System.err.println("'application/core' folder does not exist.");
+                    System.exit(ExitCodes.NO_CORE_FOLDER);
+                }
+                try {
+                    if (!new File(coreDir, "MY_Loader.php").exists()) {
+                        Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
+                                new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath());
+                    } else {
+                        if (forcePatch) Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
+                                new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath(),
+                                StandardCopyOption.REPLACE_EXISTING);
+                    }
+                } catch (Exception e) {
+                    System.err.println("There was an problem patching your Code Igniter distribution");
+                    System.exit(ExitCodes.PATCHING_ERROR);
+                }
+                System.out.println("Distribution patching complete.");
             }
         } catch (CmdLineException e) {
             System.out.println("Unable to parse command line arguments");
