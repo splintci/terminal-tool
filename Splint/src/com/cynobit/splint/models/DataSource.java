@@ -26,7 +26,7 @@ public class DataSource {
     }
 
     public boolean updatePackageInfo(String identifier, String version, int versionId, String integrity) {
-        if (getPackageVersionId(identifier) == -1) {
+        if (getPackageVersion(identifier).equals("z0.0.0")) {
             try {
                 PreparedStatement statement = connection.prepareStatement(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?);",
                         Packages.TABLE_NAME,
@@ -92,19 +92,19 @@ public class DataSource {
         return true;
     }
 
-    public int getPackageVersionId(String identifier) {
+    public String getPackageVersion(String identifier) {
         try {
             PreparedStatement statement = connection.prepareStatement(String.format("SELECT * FROM %s WHERE %s = ?;",
                     Packages.TABLE_NAME, DBContract.getName(Packages.IDENTIFIER)));
             statement.setString(1, identifier);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getInt(DBContract.getName(Packages.VERSION_ID));
+                return resultSet.getString(DBContract.getName(Packages.VERSION));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
+        return "z0.0.0";
     }
 
     private boolean dropTables() {

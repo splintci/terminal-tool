@@ -18,4 +18,6 @@ class ExitCodes {
     static final int DESCRIPTOR_READ_ERROR = 12;
     static final int PATCHING_ERROR = 13;
     static final int NO_CORE_FOLDER = 14;
+    static final int FOLDER_CREATION_FAILED = 15;
+    static final int PACKAGE_EXISTS = 16;
 }

@@ -35,7 +35,7 @@ public class CloudManager {
     }
 
     public void getLatestVersion(String identifier, CloudResponseListener listener) {
-        String request = API + "getLatestVersionId";
+        String request = API + "getLatestVersion";
         ArrayList<Pair<String, String>> parameters = new ArrayList<>();
         parameters.add(new Pair<>("identifier", identifier));
         fetch(request, parameters, listener);

@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="Splint">
+    <output-path>$PROJECT_DIR$/out/artifacts/Splint</output-path>
+    <root id="root">
+      <element id="archive" name="splint.jar">
+        <element id="module-output" name="Splint" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/Splint/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

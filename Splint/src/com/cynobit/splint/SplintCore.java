@@ -148,6 +148,30 @@ class SplintCore {
         return dependencies;
     }
 
+    static void listPackages() {
+        List<String> packageList = new ArrayList<>();
+        File packagesDir = new File(System.getProperty("user.dir") + "/application/splints");
+        if (packagesDir.isDirectory()) {
+            File[] vendors = packagesDir.listFiles();
+            for (File vendor : vendors != null ? vendors : new File[0]) {
+                if (vendor.isDirectory()) {
+                    File[] packages = vendor.listFiles();
+                    for (File _package : packages != null ? packages : new File[0]) {
+                        if (_package.isDirectory()) packageList.add(vendor.getName() + "/" + _package.getName());
+                    }
+                }
+            }
+        }
+        if (packageList.size() > 0) {
+            System.out.println("Installed Packages:");
+            System.out.println();
+            for (String _package : packageList) {
+                System.out.println(_package);
+            }
+        } else {
+            System.out.println("No Packages Installed.");
+        }
+    }
 
     private static boolean installPackage(String identifier) {
         System.out.println(String.format("Installing package: %s ...", identifier));
@@ -242,16 +266,16 @@ class SplintCore {
         if (!dataSource.isConnected()) {
             if (!dataSource.connect()) return false;
         }
-        int localVersion = dataSource.getPackageVersionId(identifier);
-        if (localVersion == -1) return false;
-        final int[] remoteVersionId = {-1};
+        String localVersion = dataSource.getPackageVersion(identifier);
+        if (localVersion.equals("z0.0.0")) return false;
+        final String[] remoteVersion = {"z0.0.0"};
         cloudManager.getLatestVersion(identifier, new CloudManager.CloudResponseListener() {
             @Override
             public void onResponseReceived(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getInt("code") == 1) {
-                        remoteVersionId[0] = object.getInt("data");
+                        remoteVersion[0] = object.getString("data");
                     }
                     synchronized (cloudManager) {
                         cloudManager.notifyAll();
@@ -278,6 +302,6 @@ class SplintCore {
                 e.printStackTrace();
             }
         }
-        return !(remoteVersionId[0] > dataSource.getPackageVersionId(identifier));
+        return !(remoteVersion[0].compareToIgnoreCase(dataSource.getPackageVersion(identifier)) > 0);
     }
 }
