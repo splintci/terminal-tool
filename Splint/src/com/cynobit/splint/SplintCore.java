@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
@@ -171,6 +172,61 @@ class SplintCore {
         } else {
             System.out.println("No Packages Installed.");
         }
+    }
+
+    static void createPackage(String newPackage, boolean readMe) {
+        if (!newPackage.matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) System.exit(ExitCodes.INVALID_PACKAGE_NAME);
+        String packageRoot = System.getProperty("user.dir") + "/application/splints/" + newPackage;
+        // Root.
+        File _package = new File(packageRoot);
+        if (_package.isDirectory()) {
+            System.err.println("Package " + newPackage + " already exists.");
+            System.exit(ExitCodes.PACKAGE_EXISTS);
+        }
+        if (!_package.mkdirs()) System.exit(ExitCodes.FOLDER_CREATION_FAILED);
+        try {
+            Files.copy(new File(Main.appRoot + "modifiers/index.html").toPath(),
+                    new File(packageRoot + "/index.html").toPath());
+            // Libraries
+            _package = new File(packageRoot + "/libraries");
+            if (!_package.mkdir()) System.exit(ExitCodes.FOLDER_CREATION_FAILED);
+            Files.copy(new File(Main.appRoot + "modifiers/index.html").toPath(),
+                    new File(packageRoot + "/libraries/index.html").toPath());
+            // Models
+            _package = new File(packageRoot + "/models");
+            if (!_package.mkdir()) System.exit(ExitCodes.FOLDER_CREATION_FAILED);
+            Files.copy(new File(Main.appRoot + "modifiers/index.html").toPath(),
+                    new File(packageRoot + "/models/index.html").toPath());
+            // Views
+            _package = new File(packageRoot + "/views");
+            if (!_package.mkdir()) System.exit(ExitCodes.FOLDER_CREATION_FAILED);
+            Files.copy(new File(Main.appRoot + "modifiers/index.html").toPath(),
+                    new File(packageRoot + "/views/index.html").toPath());
+            // Helpers
+            _package = new File(packageRoot + "/helpers");
+            if (!_package.mkdir()) System.exit(ExitCodes.FOLDER_CREATION_FAILED);
+            Files.copy(new File(Main.appRoot + "modifiers/index.html").toPath(),
+                    new File(packageRoot + "/helpers/index.html").toPath());
+            // Config
+            _package = new File(packageRoot + "/config");
+            if (!_package.mkdir()) System.exit(ExitCodes.FOLDER_CREATION_FAILED);
+            Files.copy(new File(Main.appRoot + "modifiers/index.html").toPath(),
+                    new File(packageRoot + "/config/index.html").toPath());
+        } catch (Exception e) {
+            System.err.println("The was an error in creating your package.");
+            System.exit(ExitCodes.PACKAGE_CREATE_ERROR);
+        }
+        // Conclusion
+        if (readMe) {
+            try {
+                PrintWriter printWriter = new PrintWriter(packageRoot + "/README.md", "UTF-8");
+                printWriter.println("# " + newPackage.split("/")[1] + " #");
+                printWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("New package Created in application/splints/" + newPackage + ".");
     }
 
     private static boolean installPackage(String identifier) {
