@@ -43,7 +43,7 @@ public class DataSource {
             }
         } else {
             try {
-                PreparedStatement statement = connection.prepareStatement(String.format("UPDATE %s SET(%s, %s, %s) VALUES (?, ?, ?) WHERE %s = ?;",
+                PreparedStatement statement = connection.prepareStatement(String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?;",
                         Packages.TABLE_NAME,
                         DBContract.getName(Packages.VERSION), DBContract.getName(Packages.VERSION_ID),
                         DBContract.getName(Packages.INTEGRITY), DBContract.getName(Packages.IDENTIFIER)));

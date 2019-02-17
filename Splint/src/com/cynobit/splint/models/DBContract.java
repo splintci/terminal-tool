@@ -25,7 +25,7 @@ class DBContract {
         return sql.toString();
     }
 
-    public static String getName(String config) {
+    static String getName(String config) {
         return config.substring(0, config.indexOf(" "));
     }
 

@@ -7,8 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Splint/com/cynobit/splint/Main.class" afterPath="$PROJECT_DIR$/out/production/Splint/com/cynobit/splint/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/ExitCodes.java" afterPath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/ExitCodes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java" afterPath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" afterPath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java" afterPath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java" afterPath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,14 +72,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="128" column="113" lean-forward="false" selection-start-line="128" selection-start-column="113" selection-end-line="128" selection-end-column="113" />
+            <state relative-caret-position="1751">
+              <caret line="103" column="70" lean-forward="false" selection-start-line="103" selection-start-column="70" selection-end-line="103" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9442#9481#0" expanded="true" />
+                <element signature="e#9682#9721#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,18 +88,18 @@
       <file leaf-file-name="ExitCodes.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/ExitCodes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+            <state relative-caret-position="238">
+              <caret line="23" column="54" lean-forward="false" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SplintCore.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SplintCore.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2499">
-              <caret line="246" column="9" lean-forward="false" selection-start-line="246" selection-start-column="9" selection-end-line="246" selection-end-column="9" />
+            <state relative-caret-position="238">
+              <caret line="311" column="33" lean-forward="false" selection-start-line="311" selection-start-column="33" selection-end-line="311" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,32 +107,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Preferences.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="39" column="69" lean-forward="false" selection-start-line="31" selection-start-column="16" selection-end-line="39" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DBContract.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="80" lean-forward="false" selection-start-line="10" selection-start-column="80" selection-end-line="10" selection-end-column="80" />
-              <folding />
+            <state relative-caret-position="434">
+              <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+              <folding>
+                <element signature="e#1077#1078#0" expanded="true" />
+                <element signature="e#1140#1141#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataSource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java">
+      <file leaf-file-name="CloudManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="39" column="28" lean-forward="false" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="-2380">
+              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -180,14 +180,14 @@
         <option value="$PROJECT_DIR$/src/com/Controller.java" />
         <option value="$PROJECT_DIR$/src/com/cynobit/splint/Main.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java" />
         <option value="$PROJECT_DIR$/dist/build.sh" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/ExitCodes.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
       </list>
     </option>
   </component>
@@ -334,7 +334,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Command Line Splint">
+  <component name="RunManager" selected="Application.Install from 'splint.json' file in root.">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -639,12 +639,28 @@
       <envs />
       <method />
     </configuration>
-    <list size="5">
+    <configuration default="false" name="Install from 'splint.json' file in root." type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="com.cynobit.splint.Main" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="install" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Splint" />
+      <envs />
+      <method />
+    </configuration>
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.GUI" />
       <item index="1" class="java.lang.String" itemvalue="Application.Command Line Splint" />
       <item index="2" class="java.lang.String" itemvalue="Application.Splint Command Line Install" />
       <item index="3" class="java.lang.String" itemvalue="Application.List Packages" />
       <item index="4" class="java.lang.String" itemvalue="Application.Create Package" />
+      <item index="5" class="java.lang.String" itemvalue="Application.Install from 'splint.json' file in root." />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -682,7 +698,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -723,8 +739,26 @@
           <line>5</line>
           <properties />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java</url>
+          <line>96</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java</url>
+          <line>99</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java</url>
+          <line>104</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -749,7 +783,7 @@
           <caret line="41" column="13" lean-forward="false" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9442#9481#0" expanded="true" />
+            <element signature="e#9682#9721#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -766,7 +800,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="59" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
-          <folding />
+          <folding>
+            <element signature="e#1077#1078#0" expanded="true" />
+            <element signature="e#1140#1141#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -783,26 +820,7 @@
         <state relative-caret-position="799">
           <caret line="47" column="45" lean-forward="true" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
           <folding>
-            <element signature="e#262#312#0" expanded="true" />
-            <element signature="e#1906#3373#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-            <element signature="e#3414#3464#0" expanded="true" />
-            <element signature="e#6057#6096#0" expanded="true" />
-            <element signature="e#9444#9483#0" expanded="true" />
-            <marker date="1549231223282" expanded="false" signature="3612:3680" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="6001:6016" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="6248:6316" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="9385:9400" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="10972:10987" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="10999:11009" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11035:11050" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11062:11072" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11099:11114" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11127:11137" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11167:11182" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11198:11208" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11344:11359" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11378:11388" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -841,7 +859,7 @@
           <caret line="41" column="13" lean-forward="false" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9442#9481#0" expanded="true" />
+            <element signature="e#9682#9721#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -858,7 +876,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="59" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
-          <folding />
+          <folding>
+            <element signature="e#1077#1078#0" expanded="true" />
+            <element signature="e#1140#1141#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -882,26 +903,7 @@
         <state relative-caret-position="544">
           <caret line="39" column="45" lean-forward="false" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
           <folding>
-            <element signature="e#262#312#0" expanded="true" />
-            <element signature="e#1906#3373#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-            <element signature="e#3414#3464#0" expanded="true" />
-            <element signature="e#6057#6096#0" expanded="true" />
-            <element signature="e#9444#9483#0" expanded="true" />
-            <marker date="1549231223282" expanded="false" signature="3612:3680" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="6001:6016" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="6248:6316" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="9385:9400" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="10972:10987" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="10999:11009" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11035:11050" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11062:11072" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11099:11114" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11127:11137" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11167:11182" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11198:11208" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11344:11359" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11378:11388" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -940,7 +942,7 @@
           <caret line="41" column="13" lean-forward="false" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9442#9481#0" expanded="true" />
+            <element signature="e#9682#9721#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -957,7 +959,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="59" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
-          <folding />
+          <folding>
+            <element signature="e#1077#1078#0" expanded="true" />
+            <element signature="e#1140#1141#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -981,26 +986,7 @@
         <state relative-caret-position="544">
           <caret line="39" column="45" lean-forward="true" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
           <folding>
-            <element signature="e#262#312#0" expanded="true" />
-            <element signature="e#1906#3373#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-            <element signature="e#3414#3464#0" expanded="true" />
-            <element signature="e#6057#6096#0" expanded="true" />
-            <element signature="e#9444#9483#0" expanded="true" />
-            <marker date="1549231223282" expanded="false" signature="3612:3680" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="6001:6016" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="6248:6316" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="9385:9400" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="10972:10987" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="10999:11009" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11035:11050" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11062:11072" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11099:11114" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11127:11137" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11167:11182" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11198:11208" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11344:11359" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11378:11388" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1039,7 +1025,7 @@
           <caret line="41" column="13" lean-forward="false" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9442#9481#0" expanded="true" />
+            <element signature="e#9682#9721#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1057,26 +1043,7 @@
         <state relative-caret-position="34">
           <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
           <folding>
-            <element signature="e#262#312#0" expanded="true" />
-            <element signature="e#1906#3373#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-            <element signature="e#3414#3464#0" expanded="true" />
-            <element signature="e#6057#6096#0" expanded="true" />
-            <element signature="e#9444#9483#0" expanded="true" />
-            <marker date="1549231223282" expanded="false" signature="3612:3680" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="6001:6016" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="6248:6316" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="9385:9400" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="10972:10987" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="10999:11009" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11035:11050" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11062:11072" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11099:11114" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11127:11137" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11167:11182" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11198:11208" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11344:11359" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11378:11388" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1115,7 +1082,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9442#9481#0" expanded="true" />
+            <element signature="e#9682#9721#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1188,51 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="80" lean-forward="false" selection-start-line="10" selection-start-column="80" selection-end-line="10" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding>
-            <element signature="e#262#312#0" expanded="true" />
-            <element signature="e#1906#3373#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-            <element signature="e#3414#3464#0" expanded="true" />
-            <element signature="e#6057#6096#0" expanded="true" />
-            <element signature="e#9444#9483#0" expanded="true" />
-            <marker date="1549231223282" expanded="false" signature="3612:3680" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="6001:6016" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="6248:6316" ph="run() → {" />
-            <marker date="1549231223282" expanded="false" signature="9385:9400" ph="}" />
-            <marker date="1549231223282" expanded="false" signature="10972:10987" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="10999:11009" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11035:11050" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11062:11072" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11099:11114" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11127:11137" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11167:11182" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11198:11208" ph=" }" />
-            <marker date="1549231223282" expanded="false" signature="11344:11359" ph=" { " />
-            <marker date="1549231223282" expanded="false" signature="11378:11388" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="39" column="28" lean-forward="false" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/build.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-331">
@@ -1247,39 +1169,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java">
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2499">
-          <caret line="246" column="9" lean-forward="false" selection-start-line="246" selection-start-column="9" selection-end-line="246" selection-end-column="9" />
+        <state relative-caret-position="136">
+          <caret line="25" column="47" lean-forward="false" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2380">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="39" column="69" lean-forward="false" selection-start-line="31" selection-start-column="16" selection-end-line="39" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/ExitCodes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+        <state relative-caret-position="238">
+          <caret line="23" column="54" lean-forward="false" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="128" column="113" lean-forward="false" selection-start-line="128" selection-start-column="113" selection-end-line="128" selection-end-column="113" />
+        <state relative-caret-position="1751">
+          <caret line="103" column="70" lean-forward="false" selection-start-line="103" selection-start-column="70" selection-end-line="103" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9442#9481#0" expanded="true" />
+            <element signature="e#9682#9721#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+          <folding>
+            <element signature="e#1077#1078#0" expanded="true" />
+            <element signature="e#1140#1141#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="49" column="48" lean-forward="true" selection-start-line="49" selection-start-column="48" selection-end-line="49" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="311" column="33" lean-forward="false" selection-start-line="311" selection-start-column="33" selection-end-line="311" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

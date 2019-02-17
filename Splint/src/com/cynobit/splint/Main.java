@@ -97,13 +97,16 @@ public class Main {
                         }
                     } else {
                         File splintFile = new File(System.getProperty("user.dir") + "/splint.json");
-                        if (!splintFile.isFile()) System.exit(ExitCodes.NO_SPLINT_FILE);
+                        if (!splintFile.isFile()) {
+                            System.out.println("No 'splint.json' file found.");
+                            System.exit(0);
+                        }
+                        System.out.println("Reading 'splint.json' file");
                         FileReader fileReader = new FileReader(splintFile);
                         BufferedReader bufferedReader = new BufferedReader(fileReader);
                         String line;
                         StringBuilder builder = new StringBuilder();
                         while ((line = bufferedReader.readLine()) != null) {
-                            System.out.println(line);
                             builder.append(line);
                         }
                         bufferedReader.close();
@@ -113,6 +116,7 @@ public class Main {
                                 JSONArray installArray = splintJSON.getJSONArray("install");
                                 for (int x = 0; x < installArray.length(); x++) {
                                     if (installArray.getString(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                                        System.out.println("Found package " + installArray.getString(x));
                                         packages.add(installArray.getString(x));
                                     } else {
                                         System.err.println("Invalid package name in splint.json file: " + installArray.getString(x));

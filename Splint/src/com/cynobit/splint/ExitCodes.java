@@ -21,6 +21,5 @@ class ExitCodes {
     static final int FOLDER_CREATION_FAILED = 15;
     static final int PACKAGE_EXISTS = 16;
     static final int PACKAGE_CREATE_ERROR = 17;
-    static final int NO_SPLINT_FILE = 18;
-    static final int ERROR_PROCESSING_SPLINT_FILE = 19;
+    static final int ERROR_PROCESSING_SPLINT_FILE = 18;
 }

@@ -309,6 +309,7 @@ class SplintCore {
                 System.out.write(("\rDownloading package: " + identifier + " " + currentProgress + "%").getBytes());
                 bout.write(data, 0, x);
             }
+            System.out.println();
             bout.close();
             in.close();
             return integrity.equals(getMD5Checksum(Main.appRoot + "packages/" + identifier + ".zip"));
