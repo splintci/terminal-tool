@@ -1,13 +1,16 @@
 package com.cynobit.splint;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -69,6 +72,7 @@ public class Main {
         final CmdLineParser parser = new CmdLineParser(this);
         if (arguments.length < 1) {
             parser.printUsage(System.out);
+
             System.exit(0);
         }
         try {
@@ -82,13 +86,46 @@ public class Main {
                         System.exit(ExitCodes.NO_APPLICATION_FOLDER);
                     }
                     List<String> packages = new ArrayList<>();
-                    for (int x = 1; x < specialArgs.size(); x++) {
-                        if (specialArgs.get(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
-                            packages.add(specialArgs.get(x));
-                        } else {
-                            System.out.println("Invalid package name: " + specialArgs.get(x));
-                            System.exit(ExitCodes.INVALID_PACKAGE_NAME);
+                    if (specialArgs.size() > 1) {
+                        for (int x = 1; x < specialArgs.size(); x++) {
+                            if (specialArgs.get(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                                packages.add(specialArgs.get(x));
+                            } else {
+                                System.out.println("Invalid package name: " + specialArgs.get(x));
+                                System.exit(ExitCodes.INVALID_PACKAGE_NAME);
+                            }
                         }
+                    } else {
+                        File splintFile = new File(System.getProperty("user.dir") + "/splint.json");
+                        if (!splintFile.isFile()) System.exit(ExitCodes.NO_SPLINT_FILE);
+                        FileReader fileReader = new FileReader(splintFile);
+                        BufferedReader bufferedReader = new BufferedReader(fileReader);
+                        String line;
+                        StringBuilder builder = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            System.out.println(line);
+                            builder.append(line);
+                        }
+                        bufferedReader.close();
+                        try {
+                            JSONObject splintJSON = new JSONObject(builder.toString());
+                            if (splintJSON.has("install")) {
+                                JSONArray installArray = splintJSON.getJSONArray("install");
+                                for (int x = 0; x < installArray.length(); x++) {
+                                    if (installArray.getString(x).matches("(\\w+)/([a-zA-Z0-9_\\-]+)")) {
+                                        packages.add(installArray.getString(x));
+                                    } else {
+                                        System.err.println("Invalid package name in splint.json file: " + installArray.getString(x));
+                                        System.exit(ExitCodes.INVALID_PACKAGE_NAME);
+                                    }
+                                }
+                            } else {
+                                System.out.println("No packages to install.");
+                            }
+                        } catch (Exception e) {
+                            System.exit(ExitCodes.ERROR_PROCESSING_SPLINT_FILE);
+                        }
+
                     }
                     List<String> dependencies = SplintCore.getDependencies(SplintCore.installPackages(packages));
                     while (dependencies.size() > 0) {
