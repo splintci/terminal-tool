@@ -31,6 +31,8 @@ class SplintCore {
             System.out.println(String.format("Reading cache for package %s ...", identifier));
             if (!packageExistsLocally(identifier)) {
                 toDownload.add(identifier);
+            } else {
+                toInstall.add(identifier);
             }
         }
         if (toDownload.size() > 0) {
@@ -98,6 +100,10 @@ class SplintCore {
                     e.printStackTrace();
                 }
             }
+        }
+        System.out.println("The following packages will be installed");
+        for (String _package : toInstall) {
+            System.out.println("[*] " + _package);
         }
         for (String _package : toInstall) {
             if (!installPackage(_package)) {

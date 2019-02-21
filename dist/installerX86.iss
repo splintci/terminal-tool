@@ -32,6 +32,11 @@ ChangesEnvironment=true
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
+[Dirs]
+Name: "{app}"; Permissions: users-full
+Name: "{app}\packages"; Permissions: users-full
+Name: "{app}\modifiers"; Permissions: users-full
+
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
@@ -39,6 +44,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "C:\Repositories\SplintGUI\dist\bin\x86\splint.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Program Files (x86)\Java\jdk1.8.0_191\jre\*"; DestDir: "{app}\jre"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Repositories\SplintGUI\Splint\libs\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Repositories\SplintGUI\out\production\Splint\modifiers\*"; DestDir: "{app}\modifiers"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

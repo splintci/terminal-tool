@@ -45,6 +45,9 @@ public class Main {
     @Option(name = "-r", aliases = {"--read-me"}, usage = "Create README File when creating package.")
     private boolean readMe;
 
+    @Option(name = "-p", aliases = {"--current-path"}, usage = "Shows the current recognozable path.")
+    private boolean path;
+
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Argument
@@ -56,6 +59,7 @@ public class Main {
         final Main instance = new Main();
         try {
             appRoot = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath() + "\\";
+            appRoot = appRoot.replace("\\splint.exe", "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -166,6 +170,9 @@ public class Main {
             } else if (newPackage != null) {
                 noPatch = true;
                 SplintCore.createPackage(newPackage, readMe);
+            } else if (path) {
+                noPatch = true;
+                System.out.println(System.getProperty("user.dir"));
             }
             if (!noPatch) {
                 System.out.println("Patching application Loader class...");

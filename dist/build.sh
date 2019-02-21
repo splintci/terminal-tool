@@ -38,12 +38,12 @@ echo ""
 echo "64bit Installer"
 
 # Create 64bit installer
-iscc "C:\Repositories\SSVP\dist\installerX64.iss"
+iscc "C:\Repositories\SplintGUI\dist\installerX64.iss"
 
 echo "32bit Installer"
 
 # Create 32bit installer
-iscc "C:\Repositories\SSVP\dist\installerX86.iss"
+iscc "C:\Repositories\SplintGUI\dist\installerX86.iss"
 
 echo ""
 

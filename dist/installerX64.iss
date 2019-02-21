@@ -35,10 +35,16 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 ;[Tasks]
 ;Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
+[Dirs]
+Name: "{app}"; Permissions: users-full
+Name: "{app}\packages"; Permissions: users-full
+Name: "{app}\modifiers"; Permissions: users-full
+
 [Files]
 Source: "C:\Repositories\SplintGUI\dist\bin\x64\splint.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Program Files\Java\jdk1.8.0_191\jre\*"; DestDir: "{app}\jre"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Repositories\SplintGUI\Splint\libs\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Repositories\SplintGUI\out\production\Splint\modifiers\*"; DestDir: "{app}\modifiers"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
