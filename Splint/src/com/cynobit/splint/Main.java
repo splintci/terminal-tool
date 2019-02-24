@@ -30,7 +30,7 @@ public class Main {
     private String packageIdentifier;
 
     @SuppressWarnings("FieldCanBeLocal")
-    @Option(name = "-n", aliases = {"--no-patch", "--no-install-sdk"}, usage = "Installs or Patch your current Code-Igniter distribution")
+    @Option(name = "-n", aliases = {"--no-patch", "--no-install-sdk"}, usage = "Do not patch the loader for the current distribution")
     private boolean noPatch = false;
 
     @Option(name = "-f", aliases = {"--force-patch"}, usage = "Forcefully patches your distribution even if the Loader class already exists.")
@@ -45,8 +45,8 @@ public class Main {
     @Option(name = "-r", aliases = {"--read-me"}, usage = "Create README File when creating package.")
     private boolean readMe;
 
-    @Option(name = "-p", aliases = {"--current-path"}, usage = "Shows the current recognozable path.")
-    private boolean path;
+    @Option(name = "-p", aliases = {"--patch"}, usage = "Patches a code-igniter distributable..")
+    private boolean patch = false;
 
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
@@ -170,32 +170,11 @@ public class Main {
             } else if (newPackage != null) {
                 noPatch = true;
                 SplintCore.createPackage(newPackage, readMe);
-            } else if (path) {
+            } else if (patch) {
                 noPatch = true;
-                System.out.println(System.getProperty("user.dir"));
+                SplintCore.patchLoader(true);
             }
-            if (!noPatch) {
-                System.out.println("Patching application Loader class...");
-                File coreDir = new File(System.getProperty("user.dir") + "/application/core");
-                if (!coreDir.isDirectory()) {
-                    System.err.println("'application/core' folder does not exist.");
-                    System.exit(ExitCodes.NO_CORE_FOLDER);
-                }
-                try {
-                    if (!new File(coreDir, "MY_Loader.php").exists()) {
-                        Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
-                                new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath());
-                    } else {
-                        if (forcePatch) Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
-                                new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath(),
-                                StandardCopyOption.REPLACE_EXISTING);
-                    }
-                } catch (Exception e) {
-                    System.err.println("There was an problem patching your Code Igniter distribution");
-                    System.exit(ExitCodes.PATCHING_ERROR);
-                }
-                System.out.println("Distribution patching complete.");
-            }
+            if (!noPatch) SplintCore.patchLoader(forcePatch);
         } catch (CmdLineException e) {
             System.out.println("Unable to parse command line arguments");
             System.exit(ExitCodes.BAD_ARGUMENTS);

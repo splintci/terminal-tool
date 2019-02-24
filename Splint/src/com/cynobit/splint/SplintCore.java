@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,6 +154,29 @@ class SplintCore {
             }
         }
         return dependencies;
+    }
+
+    static void patchLoader(boolean forcePatch) {
+        System.out.println("Patching application Loader class...");
+        File coreDir = new File(System.getProperty("user.dir") + "/application/core");
+        if (!coreDir.isDirectory()) {
+            System.err.println("'application/core' folder does not exist.");
+            System.exit(ExitCodes.NO_CORE_FOLDER);
+        }
+        try {
+            if (!new File(coreDir, "MY_Loader.php").exists()) {
+                Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
+                        new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath());
+            } else {
+                if (forcePatch) Files.copy(new File(Main.appRoot + "modifiers/MY_Loader.php").toPath(),
+                        new File(System.getProperty("user.dir") + "/application/core/MY_Loader.php").toPath(),
+                        StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (Exception e) {
+            System.err.println("There was an problem patching your Code Igniter distribution");
+            System.exit(ExitCodes.PATCHING_ERROR);
+        }
+        System.out.println("Distribution patching complete.");
     }
 
     static void listPackages() {
