@@ -87,7 +87,7 @@ public class Main {
                 if (specialArgs.get(0).equals("install")) {
                     File dir = new File(System.getProperty("user.dir") + "/application");
                     if (!dir.isDirectory()) {
-                        System.out.println("Could not locate application folder, pls run this command in a code igniter root or one with the application folder");
+                        System.out.println("Could not locate application folder, Please run this command in a code igniter root or one with the application folder");
                         System.exit(ExitCodes.NO_APPLICATION_FOLDER);
                     }
                     List<String> packages = new ArrayList<>();
@@ -134,12 +134,13 @@ public class Main {
                         } catch (Exception e) {
                             System.exit(ExitCodes.ERROR_PROCESSING_SPLINT_FILE);
                         }
-
                     }
                     List<String> dependencies = SplintCore.getDependencies(SplintCore.installPackages(packages));
                     while (dependencies.size() > 0) {
                         dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                     }
+                    System.out.println("Updating Splint File...");
+                    SplintCore.refreshRootSplintJSONFile();
                     System.out.println("Done Installing Packages.");
                 }
             }
@@ -160,6 +161,8 @@ public class Main {
                     while (dependencies.size() > 0) {
                         dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                     }
+                    System.out.println("Updating Splint File...");
+                    SplintCore.refreshRootSplintJSONFile();
                     System.out.println("Done Installing Packages.");
                 } else {
                     System.out.println("Invalid package name: " + packageIdentifier);
@@ -167,7 +170,7 @@ public class Main {
                 }
             } else if (listAllPackages) {
                 noPatch = true;
-                SplintCore.listPackages();
+                SplintCore.listPackages(false);
             } else if (newPackage != null) {
                 noPatch = true;
                 SplintCore.createPackage(newPackage, readMe);

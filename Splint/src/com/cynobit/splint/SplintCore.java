@@ -2,6 +2,7 @@ package com.cynobit.splint;
 
 import com.cynobit.splint.models.CloudManager;
 import com.cynobit.splint.models.DataSource;
+import com.sun.istack.internal.Nullable;
 import net.lingala.zip4j.core.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -179,8 +180,9 @@ class SplintCore {
         System.out.println("Distribution patching complete.");
     }
 
-    static void listPackages() {
-        List<String> packageList = new ArrayList<>();
+    @Nullable
+    static ArrayList<String> listPackages(boolean returnList) {
+        ArrayList<String> packageList = new ArrayList<>();
         File packagesDir = new File(System.getProperty("user.dir") + "/application/splints");
         if (packagesDir.isDirectory()) {
             File[] vendors = packagesDir.listFiles();
@@ -193,15 +195,19 @@ class SplintCore {
                 }
             }
         }
-        if (packageList.size() > 0) {
-            System.out.println("Installed Packages:");
-            System.out.println();
-            for (String _package : packageList) {
-                System.out.println(_package);
+        if (!returnList) {
+            if (packageList.size() > 0) {
+                System.out.println("Installed Packages:");
+                System.out.println();
+                for (String _package : packageList) {
+                    System.out.println(_package);
+                }
+            } else {
+                System.out.println("No Packages Installed.");
             }
-        } else {
-            System.out.println("No Packages Installed.");
         }
+        if (returnList) return packageList;
+        return null;
     }
 
     static void createPackage(String newPackage, boolean readMe) {
@@ -260,7 +266,7 @@ class SplintCore {
     }
 
     static void createCIProject(String name, boolean noPatch) {
-        System.out.println("Creating Code-Igniter Project: " + name +"...");
+        System.out.println("Creating Code-Igniter Project: " + name + "...");
         try {
             ZipFile zipFile = new ZipFile(Main.appRoot + "modifiers/splint-sdk.zip");
             zipFile.extractAll(System.getProperty("user.dir") + "/" + name);
@@ -276,6 +282,23 @@ class SplintCore {
         } catch (Exception e) {
             System.err.println("ERROR Creating Code-Igniter Project: " + name);
             System.exit(ExitCodes.ERROR_CREATING_CI_PROJECT);
+        }
+    }
+
+    static void refreshRootSplintJSONFile() {
+        JSONObject splintJSON = new JSONObject();
+        JSONArray installArray = new JSONArray();
+        try {
+            ArrayList<String> packageList = listPackages(true);
+            for (String _package : packageList != null ? packageList : new ArrayList<String>()) {
+                installArray.put(_package);
+            }
+            splintJSON.put("install", installArray);
+            PrintWriter printWriter = new PrintWriter(System.getProperty("user.dir") + "/splint.json", "UTF-8");
+            printWriter.println(splintJSON.toString(2));
+            printWriter.close();
+        } catch (Exception e) {
+            System.err.println("Error Processing Splint File 'splint.json'.");
         }
     }
 
