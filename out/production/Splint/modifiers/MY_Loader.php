@@ -11,9 +11,9 @@ class MY_Loader extends CI_Loader {
    * @param  array  $autoload [description]
    * @return [type]           [description]
    */
-  function splint($splint, $autoload = array(), $params = null, $alias = null) {
+  function splint($splint, $autoload = array(), $params = null, $alias = null, $returnView = false) {
     $splint = trim($splint, '/');
-    if (!file_exists(APPPATH . "splints/$splint/")) {
+    if (!is_dir(APPPATH . "splints/$splint/")) {
       show_error("Cannot find splint '$splint'");
     }
     if (is_string($autoload)) {
@@ -22,7 +22,7 @@ class MY_Loader extends CI_Loader {
       } elseif (substr($autoload, 0, 1) == "*") {
         $this->model("../splints/$splint/models/" . substr($autoload, 1));
       } elseif (substr($autoload, 0, 1) == "-") {
-        $this->view("../splints/$splint/views/" . substr($autoload, 1));
+        $this->view("../splints/$splint/views/" . substr($autoload, 1), $params, $returnView);
       } elseif (substr($autoload, 0, 1) == "@") {
         $this->config("../splints/$splint/config/" . substr($autoload, 1));
       } elseif (substr($autoload, 0, 1) == "%") {
@@ -38,7 +38,11 @@ class MY_Loader extends CI_Loader {
           $this->library("../splints/$splint/libraries/$arg");
         }
       } elseif ($type == 'model') {
-        $this->model("../splints/$splint/models/$arg");
+        if (is_array($arg)) {
+          $this->model("../splints/$splint/models/" . $arg[0], (isset($arg[1]) ? $arg[1] : null));
+        } else {
+          $this->model("../splints/$splint/models/$arg");
+        }
       } elseif ($type == 'config') {
         $this->config("../splints/$splint/config/$arg");
       } elseif ($type == 'helper') {

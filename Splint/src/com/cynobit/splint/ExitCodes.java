@@ -22,4 +22,6 @@ class ExitCodes {
     static final int PACKAGE_EXISTS = 16;
     static final int PACKAGE_CREATE_ERROR = 17;
     static final int ERROR_PROCESSING_SPLINT_FILE = 18;
+    static final int ERROR_CREATING_CI_PROJECT = 19;
+    static final int UN_PATCH_FAILED = 20;
 }

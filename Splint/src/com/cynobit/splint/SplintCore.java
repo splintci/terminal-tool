@@ -259,6 +259,26 @@ class SplintCore {
         System.out.println("New package Created in application/splints/" + newPackage + ".");
     }
 
+    static void createCIProject(String name, boolean noPatch) {
+        System.out.println("Creating Code-Igniter Project: " + name +"...");
+        try {
+            ZipFile zipFile = new ZipFile(Main.appRoot + "modifiers/splint-sdk.zip");
+            zipFile.extractAll(System.getProperty("user.dir") + "/" + name);
+            if (noPatch) {
+                System.out.println("Un-Patching Loader class...");
+                File patchLoader = new File(System.getProperty("user.dir") + "/" + name + "/application/core/MY_Loader.php");
+                if (!patchLoader.delete()) {
+                    System.err.println("Could not Un-Patch Code-Igniter project.");
+                    System.exit(ExitCodes.UN_PATCH_FAILED);
+                }
+            }
+            System.out.println("Done.");
+        } catch (Exception e) {
+            System.err.println("ERROR Creating Code-Igniter Project: " + name);
+            System.exit(ExitCodes.ERROR_CREATING_CI_PROJECT);
+        }
+    }
+
     private static boolean installPackage(String identifier) {
         System.out.println(String.format("Installing package: %s ...", identifier));
         File file = new File(System.getProperty("user.dir") + "/application/splints/" + identifier);

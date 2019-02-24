@@ -11,8 +11,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +45,9 @@ public class Main {
 
     @Option(name = "-p", aliases = {"--patch"}, usage = "Patches a code-igniter distributable..")
     private boolean patch = false;
+
+    @Option(name = "-b", aliases = {"--begin-new-project"}, usage = "Creates a Code-Igniter distribution in a folder with the given argument as the folder name.")
+    private String projectName;
 
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
@@ -173,6 +174,9 @@ public class Main {
             } else if (patch) {
                 noPatch = true;
                 SplintCore.patchLoader(true);
+            } else if (projectName != null) {
+                SplintCore.createCIProject(projectName, noPatch);
+                noPatch = true;
             }
             if (!noPatch) SplintCore.patchLoader(forcePatch);
         } catch (CmdLineException e) {
