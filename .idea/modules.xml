@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Splint/Splint.iml" filepath="$PROJECT_DIR$/Splint/Splint.iml" />
       <module fileurl="file://$PROJECT_DIR$/SplintGUI.iml" filepath="$PROJECT_DIR$/SplintGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SplintUpdate/SplintUpdate.iml" filepath="$PROJECT_DIR$/SplintUpdate/SplintUpdate.iml" />
     </modules>
   </component>
 </project>
