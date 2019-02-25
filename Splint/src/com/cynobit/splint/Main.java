@@ -20,9 +20,13 @@ import java.util.List;
  */
 public class Main {
 
+    private final static String BUILD_VERSION = "0.0.3";
     private final static String ENVIRONMENT = "DEBUG";
 
     static String appRoot;
+
+    @Option(name = "-v", aliases = {"--version"}, usage = "Shows the current version of your Splint package manager.")
+    private boolean showVersion = false;
 
     @Option(name = "-i", aliases = "--install", usage = "Installs a splint package.")
     private String packageIdentifier;
@@ -180,6 +184,9 @@ public class Main {
             } else if (projectName != null) {
                 SplintCore.createCIProject(projectName, noPatch);
                 noPatch = true;
+            } else if (showVersion) {
+                noPatch = true;
+                System.out.println("Splint v" + Main.BUILD_VERSION);
             }
             if (!noPatch) SplintCore.patchLoader(forcePatch);
         } catch (CmdLineException e) {
