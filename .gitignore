@@ -4,6 +4,6 @@ out/production/SplintGUI/*
 out/production/Splint/packages/*
 out/production/Splint/cache.db
 out/production/Splint/preferences.json
-out/production/SplintUpdate/*
+out/production/SplintUpdate/com/*
 dist/bin/*
 almeida.com

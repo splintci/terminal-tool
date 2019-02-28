@@ -1,0 +1,151 @@
+package com.cynobit.splint_update.models;
+
+import com.cynobit.splint_update.Main;
+import javafx.util.Pair;
+
+//import javax.net.ssl.HttpURLConnection;
+import java.io.*;
+import java.net.URL;
+import java.util.ArrayList;
+
+import java.net.HttpURLConnection;
+
+@SuppressWarnings("AnonymousHasLambdaAlternative")
+public class CloudManager {
+
+    public static final String USER_AGENT = "Splint Update";
+    //private static final String URL = "https://splint.cynobit.com/";
+    private static final String URL = "http://127.0.0.1/splint.cynobit.com/";
+    public static final String BIN_API = URL + "index.php/Binaries/";
+    private static volatile CloudManager cloudManager;
+
+    private CloudManager() {
+        if (cloudManager != null) {
+            throw new RuntimeException("Use getInstance() method to get the single instance of this class.");
+        }
+    }
+
+    public static CloudManager getInstance() {
+        if (cloudManager == null) {
+            synchronized (CloudManager.class) {
+                if (cloudManager == null) cloudManager = new CloudManager();
+            }
+        }
+        return cloudManager;
+    }
+
+    public void getLatestDistributableVersion(CloudResponseListener listener) {
+        fetch(BIN_API + "getLatestVersion", listener);
+    }
+
+    public void getLatestDistributionHash(CloudResponseListener listener) {
+        fetch (BIN_API + "getUpdatePatchMD5", listener);
+    }
+
+    private void fetch(String url, final CloudResponseListener listener) {
+        Thread httpThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL obj = new URL(url);
+                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                    //add request header
+                    con.setRequestMethod("GET");
+                    con.setRequestProperty("User-Agent", USER_AGENT);
+                    con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+                    int responseCode = con.getResponseCode();
+                    Main.printLog("Sending 'GET' request to URL : " + url);
+                    Main.printLog("Response Code : " + responseCode);
+
+                    if (responseCode != 200) {
+                        listener.onServerError(responseCode);
+                        return;
+                    }
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String inputLine;
+                    StringBuilder response = new StringBuilder();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+                    Main.printLog(response.toString());
+                    listener.onResponseReceived(response.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        httpThread.start();
+    }
+
+    @SuppressWarnings("AnonymousHasLambdaAlternative")
+    private void fetch(String url, ArrayList<Pair<String, String>> parameters, final CloudResponseListener listener) {
+        Thread httpThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL obj = new URL(url);
+                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                    //add request header
+                    con.setRequestMethod("POST");
+                    con.setRequestProperty("User-Agent", USER_AGENT);
+                    con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+                    StringBuilder parameterBuilder = new StringBuilder(parameters.get(0).getKey());
+                    parameterBuilder.append("=").append(parameters.get(0).getValue());
+                    for (int x = 1; x < parameters.size(); x++) {
+                        parameterBuilder.append("&").append(parameters.get(x).getKey()).append("=");
+                        parameterBuilder.append(parameters.get(x).getValue());
+                    }
+
+                    String urlParameters = parameterBuilder.toString();
+
+                    // Send post request
+                    con.setDoOutput(true);
+                    DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                    wr.writeBytes(urlParameters);
+                    wr.flush();
+                    wr.close();
+
+                    int responseCode = con.getResponseCode();
+                    Main.printLog("Sending 'POST' request to URL : " + url);
+                    Main.printLog("Post parameters : " + urlParameters);
+                    Main.printLog("Response Code : " + responseCode);
+
+                    if (responseCode != 200) {
+                        listener.onServerError(responseCode);
+                        return;
+                    }
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    String inputLine;
+                    StringBuilder response = new StringBuilder();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+                    Main.printLog(response.toString());
+                    listener.onResponseReceived(response.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    listener.onNetworkError();
+                }
+            }
+        };
+        httpThread.start();
+    }
+
+    public interface CloudResponseListener {
+        void onResponseReceived(String response);
+
+        void onServerError(int responseCode);
+
+        void onNetworkError();
+    }
+}
