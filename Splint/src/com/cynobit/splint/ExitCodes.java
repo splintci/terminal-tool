@@ -24,4 +24,5 @@ class ExitCodes {
     static final int ERROR_PROCESSING_SPLINT_FILE = 18;
     static final int ERROR_CREATING_CI_PROJECT = 19;
     static final int UN_PATCH_FAILED = 20;
+    static final int MITMA_ON_PACKAGE_DOWNLOAD = 21;
 }

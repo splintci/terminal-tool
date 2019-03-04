@@ -48,7 +48,10 @@ class SplintCore {
                             JSONArray packages = object.getJSONArray("data");
                             for (int x = 0; x < packages.length(); x++) {
                                 if (!downloadPackage(packages.getJSONObject(x).getString("identifier"),
-                                        packages.getJSONObject(x).getString("integrity"))) System.exit(6);
+                                        packages.getJSONObject(x).getString("integrity"))) {
+                                    System.err.println("Downloaded package lacks integrity. possible MITM Attack.");
+                                    System.exit(ExitCodes.MITMA_ON_PACKAGE_DOWNLOAD);
+                                }
                                 if (!dataSource.isConnected()) {
                                     if (!dataSource.connect()) System.exit(ExitCodes.DB_CONNECTION_ERROR);
                                 }

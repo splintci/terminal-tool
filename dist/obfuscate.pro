@@ -1,5 +1,7 @@
 -injars 'C:\Repositories\SplintGUI\out\artifacts\Splint\splint.jar'
 -outjars bin\splint.jar
+-injars 'C:\Repositories\SplintGUI\out\artifacts\Splint_Update\splint_update.jar'
+-outjars bin\splint_update.jar
 
 -libraryjars 'C:\Program Files\Java\jre1.8.0_191\lib\rt.jar'
 -libraryjars 'C:\Program Files\Java\jre1.8.0_191\lib\ext\jfxrt.jar'

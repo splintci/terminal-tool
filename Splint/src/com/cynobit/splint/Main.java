@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class Main {
 
-    private final static String BUILD_VERSION = "0.0.3";
-    private final static String ENVIRONMENT = "DEBUG";
+    private final static String BUILD_VERSION = "0.0.4";
+    private final static String ENVIRONMENT = "PRODUCTION";
 
     static String appRoot;
 

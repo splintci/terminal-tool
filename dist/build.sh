@@ -18,14 +18,16 @@ echo "X64 exe"
 echo ""
 
 # Convert to exe X64
-launch4jc wrapper.xml
+launch4jc wrapperSplint.xml
+launch4jc wrapperSplintUpdate.xml
 
 echo "[*] X86 exe"
 
 echo ""
 
 # Convert to exe X86
-launch4jc wrapperX86.xml
+launch4jc wrapperSplintX86.xml
+launch4jc wrapperSplintUpdateX86.xml
 
 echo "[*] Done generating exe"
 
@@ -47,4 +49,4 @@ iscc "C:\Repositories\SplintGUI\dist\installerX86.iss"
 
 echo ""
 
-echo "Done generating distributables :-)"
+echo "Done generating distributable :-)"
