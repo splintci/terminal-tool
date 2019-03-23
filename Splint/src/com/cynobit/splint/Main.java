@@ -139,9 +139,17 @@ public class Main {
                             System.exit(ExitCodes.ERROR_PROCESSING_SPLINT_FILE);
                         }
                     }
+                    List<String> installedPackages = new ArrayList<>();
                     List<String> dependencies = SplintCore.getDependencies(SplintCore.installPackages(packages));
+                    installedPackages.addAll(packages);
                     while (dependencies.size() > 0) {
+                        for (String _package : installedPackages) {
+                            if (dependencies.contains(_package)) {
+                                dependencies.remove(_package);
+                            }
+                        }
                         dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
+                        installedPackages.addAll(dependencies);
                     }
                     System.out.println("Updating Splint File...");
                     SplintCore.refreshRootSplintJSONFile();
@@ -161,9 +169,17 @@ public class Main {
                             System.exit(ExitCodes.INVALID_PACKAGE_NAME);
                         }
                     }
+                    List<String> installedPackages = new ArrayList<>();
                     List<String> dependencies = SplintCore.getDependencies(SplintCore.installPackages(packages));
+                    installedPackages.addAll(packages);
                     while (dependencies.size() > 0) {
+                        for (String _package : installedPackages) {
+                            if (dependencies.contains(_package)) {
+                                dependencies.remove(_package);
+                            }
+                        }
                         dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
+                        installedPackages.addAll(dependencies);
                     }
                     System.out.println("Updating Splint File...");
                     SplintCore.refreshRootSplintJSONFile();

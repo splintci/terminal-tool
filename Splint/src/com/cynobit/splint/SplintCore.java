@@ -125,8 +125,9 @@ class SplintCore {
         for (String _package : packages) {
             File file = new File(System.getProperty("user.dir") + "/application/splints/" + _package + "/splint.json");
             if (!file.exists()) {
-                System.err.println("package: " + _package + " has no descriptor.");
-                System.exit(ExitCodes.NO_DESCRIPTOR);
+                System.out.println("package: " + _package + " has no descriptor.");
+                System.out.println("Skipping package...");
+                continue;
             }
             try {
                 JSONObject descriptor;
