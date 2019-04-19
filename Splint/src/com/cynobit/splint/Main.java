@@ -81,7 +81,6 @@ public class Main {
         final CmdLineParser parser = new CmdLineParser(this);
         if (arguments.length < 1) {
             parser.printUsage(System.out);
-
             System.exit(0);
         }
         try {
@@ -154,6 +153,9 @@ public class Main {
                     System.out.println("Updating Splint File...");
                     SplintCore.refreshRootSplintJSONFile();
                     System.out.println("Done Installing Packages.");
+                } else {
+                    parser.printUsage(System.out);
+                    System.exit(0);
                 }
             }
             // >_splint -i vendor/package .../... .../...
