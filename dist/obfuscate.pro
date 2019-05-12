@@ -23,6 +23,9 @@
 -keepclasseswithmembers public class com.cynobit.splint.Main {
     public static void main(java.lang.String[]);
 }
+-keepclasseswithmembers public class com.cynobit.splint_update.Main {
+    public static void main(java.lang.String[]);
+}
 
 -keepclassmembers,allowshrinking class * {
     @javafx.fxml.FXML

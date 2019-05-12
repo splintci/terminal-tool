@@ -29,6 +29,7 @@ public class Main {
     private static Preferences preferences;
 
     public static void main(String[] args) {
+        // Initialize
         try {
             appRoot = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath() + "\\";
             appRoot = appRoot.replace("\\splint-update.exe", "");
@@ -37,6 +38,7 @@ public class Main {
             System.exit(ExitCodes.ROOT_PATH_ERROR);
         }
         preferences = new Preferences(appRoot);
+        // Get Current Version of Splint Binary.
         System.out.println("Checking for updates...");
         String residentVersion = "0.0.0";
         final String[] cloudVersion = {"0.0.0"};
@@ -55,6 +57,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // Get Version of Splint Binary in the Cloud.
         cloudManager.getLatestDistributableVersion(new CloudManager.CloudResponseListener() {
             @Override
             public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
@@ -89,8 +92,10 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        // Compare Local and Cloud Binary Versions.
         if (cloudVersion[0].compareToIgnoreCase(residentVersion) > 0) {
             System.out.println("Update Found!");
+            // Do Update: Get Update Patch Integrity SHA-1.
             cloudManager.getLatestDistributionHash(new CloudManager.CloudResponseListener() {
                 @Override
                 public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
@@ -125,6 +130,7 @@ public class Main {
                     e.printStackTrace();
                 }
             }
+            // Download Update Patch.
             try {
                 URL url = new URL(CloudManager.BIN_API + "getUpdatePatch");
                 HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());

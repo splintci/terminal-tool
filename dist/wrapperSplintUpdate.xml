@@ -19,7 +19,7 @@
     <windowTitle>Splint</windowTitle>
   </singleInstance>
   <classPath>
-    <mainClass>com.cynobit.splint.Main</mainClass>
+    <mainClass>com.cynobit.splint_update.Main</mainClass>
     <cp>lib/java-json.jar</cp>
     <cp>lib/sqlite-jdbc-3.23.1.jar</cp>
     <cp>lib/zip4j_1.3.2</cp>
