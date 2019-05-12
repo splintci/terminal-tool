@@ -3,21 +3,21 @@ package com.cynobit.splint_update.models;
 import com.cynobit.splint_update.Main;
 import javafx.util.Pair;
 
-//import javax.net.ssl.HttpURLConnection;
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 
-import java.net.HttpURLConnection;
+//import java.net.HttpsURLConnection;
 
 @SuppressWarnings("AnonymousHasLambdaAlternative")
 public class CloudManager {
 
     public static final String USER_AGENT = "Splint Update";
-    //private static final String URL = "https://splint.cynobit.com/";
-    private static final String URL = "http://127.0.0.1/splint.cynobit.com/";
+    private static final String URL = "https://splint.cynobit.com/";
+    //private static final String URL = "http://127.0.0.1/splint.cynobit.com/";
     public static final String BIN_API = URL + "index.php/Binaries/";
-    public static final String CLIENT_API = URL + "index.php/SplintClient/";
+    private static final String CLIENT_API = URL + "index.php/SplintClient/";
     private static volatile CloudManager cloudManager;
 
     private CloudManager() {
@@ -43,6 +43,7 @@ public class CloudManager {
         fetch (BIN_API + "getUpdatePatchMD5", null,  listener);
     }
 
+    @SuppressWarnings("unchecked")
     public void getLatestLoaderPatch(String sha1, CloudResponseListener listener) {
         ArrayList<Pair<String, String>> parameters = new ArrayList<>();
         parameters.add(new Pair("sha", sha1));
@@ -53,11 +54,12 @@ public class CloudManager {
 
     private void fetch(String url, ArrayList<String> headers, final CloudResponseListener listener) {
         Thread httpThread = new Thread() {
+            @SuppressWarnings("unchecked")
             @Override
             public void run() {
                 try {
                     URL obj = new URL(url);
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                    HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
                     //add request header
                     con.setRequestMethod("GET");
@@ -100,11 +102,12 @@ public class CloudManager {
     @SuppressWarnings("AnonymousHasLambdaAlternative")
     private void fetch(String url, ArrayList<Pair<String, String>> parameters, ArrayList<String> headers, final CloudResponseListener listener) {
         Thread httpThread = new Thread() {
+            @SuppressWarnings("unchecked")
             @Override
             public void run() {
                 try {
                     URL obj = new URL(url);
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                    HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
                     //add request header
                     con.setRequestMethod("POST");
@@ -149,7 +152,7 @@ public class CloudManager {
                     ArrayList<Pair<String, String>> returnHeaders = new ArrayList<>();
                     if (headers != null) {
                         for (String key : headers) {
-                            returnHeaders.add(new Pair<String, String>(key, con.getHeaderField(key)));
+                            returnHeaders.add(new Pair(key, con.getHeaderField(key)));
                         }
                     }
                     listener.onResponseReceived(response.toString(), returnHeaders);

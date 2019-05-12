@@ -7,10 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/ExitCodes.java" afterPath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/ExitCodes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" afterPath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java" afterPath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -70,10 +66,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="2856">
               <caret line="182" column="60" lean-forward="true" selection-start-line="182" selection-start-column="60" selection-end-line="182" selection-end-column="60" />
               <folding />
             </state>
@@ -90,19 +86,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CloudManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CloudManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+            <state relative-caret-position="120">
+              <caret line="154" column="55" lean-forward="false" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#254#304#0" expanded="true" />
-                <element signature="e#2010#3809#0" expanded="true" />
-                <element signature="e#3808#3809#0" expanded="true" />
-                <element signature="e#3850#3900#0" expanded="true" />
-                <element signature="e#4075#6828#0" expanded="true" />
-                <element signature="e#6827#6828#0" expanded="true" />
+                <element signature="e#256#306#0" expanded="true" />
+                <element signature="e#1509#1539#0" expanded="true" />
+                <element signature="e#2048#3892#0" expanded="true" />
+                <element signature="e#2075#2105#0" expanded="true" />
+                <element signature="e#3891#3892#0" expanded="true" />
+                <element signature="e#3933#3983#0" expanded="true" />
+                <element signature="e#4158#6940#0" expanded="true" />
+                <element signature="e#4185#4215#0" expanded="true" />
+                <element signature="e#6939#6940#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,16 +131,16 @@
       <find>Pair</find>
       <find>3</find>
       <find>I/O</find>
-      <find>HttpURLConnection</find>
       <find>Stream</find>
       <find>stream</find>
       <find>PATCH</find>
       <find>HttpsURLConnection</find>
+      <find>HttpURLConnection</find>
     </findStrings>
     <replaceStrings>
       <replace>HashMap</replace>
-      <replace>HttpsURLConnection</replace>
       <replace>HttpURLConnection</replace>
+      <replace>HttpsURLConnection</replace>
     </replaceStrings>
   </component>
   <component name="FindManager">
@@ -172,9 +171,9 @@
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/ExitCodes.java" />
-        <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" />
+        <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java" />
       </list>
     </option>
   </component>
@@ -751,9 +750,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1197,22 +1196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#254#304#0" expanded="true" />
-            <element signature="e#2010#3809#0" expanded="true" />
-            <element signature="e#3808#3809#0" expanded="true" />
-            <element signature="e#3850#3900#0" expanded="true" />
-            <element signature="e#4075#6828#0" expanded="true" />
-            <element signature="e#6827#6828#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1223,9 +1206,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="2856">
           <caret line="182" column="60" lean-forward="true" selection-start-line="182" selection-start-column="60" selection-end-line="182" selection-end-column="60" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="154" column="55" lean-forward="false" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#256#306#0" expanded="true" />
+            <element signature="e#1509#1539#0" expanded="true" />
+            <element signature="e#2048#3892#0" expanded="true" />
+            <element signature="e#2075#2105#0" expanded="true" />
+            <element signature="e#3891#3892#0" expanded="true" />
+            <element signature="e#3933#3983#0" expanded="true" />
+            <element signature="e#4158#6940#0" expanded="true" />
+            <element signature="e#4185#4215#0" expanded="true" />
+            <element signature="e#6939#6940#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
