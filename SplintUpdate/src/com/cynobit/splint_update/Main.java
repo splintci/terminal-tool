@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    private final static String BUILD_VERSION = "0.0.1";
+    private final static String BUILD_VERSION = "0.0.2";
     private final static String ENVIRONMENT = "PRODUCTION";
 
     private static final CloudManager cloudManager = CloudManager.getInstance();
