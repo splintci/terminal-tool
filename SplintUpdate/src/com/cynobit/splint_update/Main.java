@@ -1,16 +1,20 @@
 package com.cynobit.splint_update;
 
 import com.cynobit.splint_update.models.CloudManager;
+import com.cynobit.splint_update.models.Preferences;
+import javafx.util.Pair;
 import net.lingala.zip4j.core.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 
 /**
  * Created by Francis Ilechukwu 2/25/2019.
@@ -22,6 +26,7 @@ public class Main {
 
     private static final CloudManager cloudManager = CloudManager.getInstance();
     private static String appRoot = null;
+    private static Preferences preferences;
 
     public static void main(String[] args) {
         try {
@@ -31,6 +36,7 @@ public class Main {
             System.err.println("Could not get app root.");
             System.exit(ExitCodes.ROOT_PATH_ERROR);
         }
+        preferences = new Preferences(appRoot);
         System.out.println("Checking for updates...");
         String residentVersion = "0.0.0";
         final String[] cloudVersion = {"0.0.0"};
@@ -51,7 +57,7 @@ public class Main {
         }
         cloudManager.getLatestDistributableVersion(new CloudManager.CloudResponseListener() {
             @Override
-            public void onResponseReceived(String response) {
+            public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
                 try {
                     JSONObject object = new JSONObject(response);
                     cloudVersion[0] = object.getString("response");
@@ -87,7 +93,7 @@ public class Main {
             System.out.println("Update Found!");
             cloudManager.getLatestDistributionHash(new CloudManager.CloudResponseListener() {
                 @Override
-                public void onResponseReceived(String response) {
+                public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
                     try {
                         JSONObject object = new JSONObject(response);
                         updateHash[0] = object.getString("response");
@@ -158,6 +164,53 @@ public class Main {
             }
             System.out.println("Splint was successfully updated.");
             System.exit(0);
+        } else {
+            System.out.println("No Updates Found.");
+        }
+        // Loader Patch Update
+        System.out.println("Updating Splint Loader...");
+        cloudManager.getLatestLoaderPatch(preferences.getLoaderSha(), new CloudManager.CloudResponseListener() {
+            @Override
+            public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
+                if (!response.equals("*")) {
+                    try {
+                        FileOutputStream outputStream = new FileOutputStream(appRoot + "modifiers/MY_Loader.php", false);
+                        byte[] strToBytes = DatatypeConverter.parseBase64Binary(response);
+                        outputStream.write(strToBytes);
+                        outputStream.close();
+                        preferences.setLoaderSha(headers.get(0).getValue());
+                        preferences.commit();
+                        System.out.println("Splint Loader Updated.");
+                    } catch (Exception e) {
+                        System.err.println("Error Updating Patch File.");
+                        System.exit(ExitCodes.PATCH_UPDATE_ERROR);
+                    }
+                } else {
+                    System.out.println("No New Loader Patch Found.");
+                }
+                synchronized (cloudManager) {
+                    cloudManager.notifyAll();
+                }
+            }
+
+            @Override
+            public void onServerError(int responseCode) {
+                System.err.println("There was an error communicating with the server");
+                System.exit(ExitCodes.SERVER_ERROR);
+            }
+
+            @Override
+            public void onNetworkError() {
+                System.err.println("Could not resolve host name.");
+                System.exit(ExitCodes.HOST_NAME_ERROR);
+            }
+        });
+        synchronized (cloudManager) {
+            try {
+                cloudManager.wait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         System.out.println("Your Splint installation is up to date.");
     }
@@ -186,7 +239,7 @@ public class Main {
                             new File(appRoot + patch.get(1)).toPath(), StandardCopyOption.REPLACE_EXISTING);
                 } else {
                     System.err.println("Patch seems to have been tampered with.");
-                    System.exit(ExitCodes.PATCH_TEMPER_ERROR);
+                    System.exit(ExitCodes.PATCH_TAMPER_ERROR);
                 }
             }
         } catch (Exception e) {

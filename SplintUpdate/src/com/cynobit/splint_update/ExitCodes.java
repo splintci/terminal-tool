@@ -12,6 +12,7 @@ public class ExitCodes {
     static final int ROOT_PATH_ERROR = 7;
     static final int BAD_PATCH_FILE = 8;
     static final int MANIFEST_ERROR = 9;
-    static final int PATCH_TEMPER_ERROR = 10;
+    static final int PATCH_TAMPER_ERROR = 10;
     static final int MITM_ATTACK_ERROR = 11;
+    static final int PATCH_UPDATE_ERROR = 12;
 }
