@@ -39,7 +39,7 @@
     <txtFileVersion>1.20.RC1</txtFileVersion>
     <fileDescription>Package and Dependency Manager for Code Igniter</fileDescription>
     <copyright>CynoBit 2018</copyright>
-    <productVersion>0.0.0.1</productVersion>
+    <productVersion>0.0.0.2</productVersion>
     <txtProductVersion>1.20.RC1</txtProductVersion>
     <productName>Splint</productName>
     <companyName>CynoBit</companyName>
