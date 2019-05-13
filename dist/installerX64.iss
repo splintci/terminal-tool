@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Splint"
-#define MyAppVersion "0.0.2"
+#define MyAppVersion "0.0.6"
 #define MyAppPublisher "Cynobit"
 #define MyAppURL "https://splint.cynobit.com/"
 #define MyAppExeName "splint.exe"

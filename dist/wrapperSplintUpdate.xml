@@ -35,7 +35,7 @@
     <runtimeBits>64</runtimeBits>
   </jre>
   <versionInfo>
-    <fileVersion>0.0.0.1</fileVersion>
+    <fileVersion>0.0.0.2</fileVersion>
     <txtFileVersion>1.20.RC1</txtFileVersion>
     <fileDescription>The Package and Dependency Manager for Code Igniter</fileDescription>
     <copyright>CynoBit 2018</copyright>
