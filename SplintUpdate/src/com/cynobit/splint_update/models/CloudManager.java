@@ -52,6 +52,15 @@ public class CloudManager {
         fetch(CLIENT_API + "getLatestLoaderPatch", parameters, headers, listener);
     }
 
+    @SuppressWarnings("unchecked")
+    public void getLatestURIPatch(String sha1, CloudResponseListener listener) {
+        ArrayList<Pair<String, String>> parameters = new ArrayList<>();
+        parameters.add(new Pair("sha", sha1));
+        ArrayList<String> headers = new ArrayList<>();
+        headers.add("SHA-1");
+        fetch(CLIENT_API + "getLatestURIPatch", parameters, headers, listener);
+    }
+
     private void fetch(String url, ArrayList<String> headers, final CloudResponseListener listener) {
         Thread httpThread = new Thread() {
             @SuppressWarnings("unchecked")
