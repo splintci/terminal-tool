@@ -218,7 +218,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        System.out.println("Your Splint installation is up to date.");
+        System.out.println("Your Splint installation is now up to date.");
     }
 
     private static void installPatch(String version) {

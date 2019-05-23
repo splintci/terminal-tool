@@ -65,10 +65,77 @@ class MY_Loader extends CI_Loader {
       } elseif($type == 'view') {
         $this->view("../splints/$splint/views/$arg");
       } else {
-        show_error ("Could not autoload object of type '$type' ($arg) for splint $splint");
+        show_error ("Could not autoload object of type '$type' for splint $splint");
       }
       return true;
     }
+  }
+  /**
+   * [package description]
+   * @param  [type] $splint [description]
+   * @return [type]         [description]
+   */
+  function package($splint) {
+    $splint = trim($splint, '/');
+    if (!is_dir(APPPATH . "splints/$splint/")) {
+      show_error("Cannot find splint '$splint'");
+      return false;
+    }
+    $descriptor = json_decode(file_get_contents(APPPATH . "splints/$splint/splint.json"));
+    $loadedCount = 0;
+    if (isset($descriptor->autoload)) {
+      // Libraries.
+      if (isset($descriptor->autoload->libraries) && is_array($descriptor->autoload->libraries)) {
+        foreach ($descriptor->autoload->libraries as $parameters) {
+          if (count($parameters) == 3) {
+            if (is_string($parameters[1]) && substr($parameters[1], 0, 1) == "@") {
+              $this->config(substr($parameters[1], 1), true, true);
+              $ci =& get_instance();
+              $params = $ci->config->item(substr($parameters[1], 1), substr($parameters[1], 1));
+              $params["autoload"] = true;
+              $this->library("../splints/$splint/libraries/" . $parameters[0], $params, $parameters[2]);
+              ++$loadedCount;
+            } else {
+              if (!is_scalar($parameters[1])) $params = json_decode(json_encode($parameters[1]), true);
+              if (isset($params)) $params["autoload"] = true;
+              $this->library("../splints/$splint/libraries/" . $parameters[0], (isset($params) && $this->is_assoc($params) ? $params : null), $parameters[2]);
+              ++$loadedCount;
+            }
+          } else {
+            $this->library("../splints/$splint/libraries/" . $parameters[0], null, $parameters[1]);
+            ++$loadedCount;
+          }
+        }
+      }
+      // Models.
+      if (isset($descriptor->autoload->models) && is_array($descriptor->autoload->models)) {
+        foreach ($descriptor->autoload->models as $parameters) {
+          if (is_string($parameters[0])) {
+            $this->model("../splints/$splint/models/" . $parameters[0], isset($parameters[1]) && is_string($parameters[1]) ? $parameters[1] : null);
+            ++$loadedCount;
+          }
+        }
+      }
+      // Helpers.
+      if (isset($descriptor->autoload->helpers) && is_array($descriptor->autoload->helpers)) {
+        foreach ($descriptor->autoload->helpers as $parameters) {
+          if (is_string($parameters)) {
+            $this->helper("../splints/$splint/helpers/" . $parameters);
+            ++$loadedCount;
+          }
+        }
+      }
+      // Configs.
+      if (isset($descriptor->autoload->configs) && is_array($descriptor->autoload->configs)) {
+        foreach ($descriptor->autoload->configs as $parameters) {
+          if (is_string($parameters)) {
+            $this->config("../splints/$splint/config/" . $parameters);
+            ++$loadedCount;
+          }
+        }
+      }
+    }
+    return $loadedCount > 0;
   }
   /**
    * [_ci_autoloader description]
@@ -125,12 +192,20 @@ class MY_Loader extends CI_Loader {
         isset($res[1]) ? $res[1] : null, isset($res[2]) ? $res[2] : null);
       }
     }
+    // Autoload splints from splint descriptors.
+    if (isset($autoload["splint+"])) {
+      foreach ($autoload["splint+"] as $splint) {
+        $this->package($splint);
+      }
+    }
   }
   /**
-   * [bind description]
-   * @param  [type] $splint [description]
-   * @param  [type] $bind   [description]
-   * @return [type]         [description]
+   * [bind   creates a Splint object and optionally binds the object to a passed
+   *         variable]
+   * @param  string $splint Splint package name.
+   * @param  object $bind   Optional variable to bind Splint object to.
+   * @return object         [Optional] Returns a Splint oject if no argument is
+   *                        passed for $bind.
    */
   function bind($splint, &$bind=null) {
     if (func_num_args() == 2) {
@@ -206,6 +281,14 @@ class MY_Loader extends CI_Loader {
       }
     }
     $this->displayAnalytics($test_metrics, $ci->unit->result(), count($test_classes));
+  }
+  /**
+   * [is_assoc description]
+   * @param  [type]  $arr [description]
+   * @return boolean      [description]
+   */
+  private function is_assoc($arr) {
+    return array_keys($arr) !== range(0, count($arr) - 1);
   }
   /**
    * [endsWith description]
