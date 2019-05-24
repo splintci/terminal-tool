@@ -7,9 +7,10 @@ import net.lingala.zip4j.core.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
-import java.net.HttpURLConnection;
+//import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -133,13 +134,13 @@ public class Main {
             // Download Update Patch.
             try {
                 URL url = new URL(CloudManager.BIN_API + "getUpdatePatch");
-                HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
-                httpConnection.setRequestMethod("GET");
-                httpConnection.setRequestProperty("User-Agent", CloudManager.USER_AGENT);
-                httpConnection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+                HttpsURLConnection httpsConnection = (HttpsURLConnection) (url.openConnection());
+                httpsConnection.setRequestMethod("GET");
+                httpsConnection.setRequestProperty("User-Agent", CloudManager.USER_AGENT);
+                httpsConnection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-                long completeFileSize = httpConnection.getContentLength();
-                BufferedInputStream in = new BufferedInputStream(httpConnection.getInputStream());
+                long completeFileSize = httpsConnection.getContentLength();
+                BufferedInputStream in = new BufferedInputStream(httpsConnection.getInputStream());
                 File folder = new File(appRoot + "updates");
                 if (!folder.exists()) {
                     if (!folder.mkdir()) System.exit(7);
@@ -173,6 +174,58 @@ public class Main {
         } else {
             System.out.println("No Updates Found.");
         }
+        //<editor-fold desc="Splint SDK Update">
+        // SDK Patch Update
+        System.out.println("Updating Splint SDK...");
+        cloudManager.getLatestSDKVersion(new CloudManager.CloudResponseListener() {
+            @Override
+            public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.has("version")) {
+                        if (object.getString("version").compareToIgnoreCase(preferences.getSDKVersion()) > 0) {
+                            downloadFile(
+                                    "https://github.com/splintci/sdk/archive/" + object.getString("version") + ".zip",
+                                    appRoot + "modifiers/", "splint-sdk.zip",
+                                    "Splint SDK " + object.getString("version"));
+                            preferences.setSDKVersion(object.getString("version"));
+                            preferences.commit();
+                            System.out.println("Splint SDK Updated.");
+                        } else {
+                            System.out.println("SDK already up to date.");
+                        }
+                    } else {
+                        System.out.println("Could not obtain recent SDK version.");
+                    }
+                } catch (Exception e) {
+                    System.err.println("There was an error parsing the server response.");
+                }
+                synchronized (cloudManager) {
+                    cloudManager.notifyAll();
+                }
+            }
+
+            @Override
+            public void onServerError(int responseCode) {
+                System.err.println("There was an error communicating with the server");
+                System.exit(ExitCodes.SERVER_ERROR);
+            }
+
+            @Override
+            public void onNetworkError() {
+                System.err.println("Could not resolve host name.");
+                System.exit(ExitCodes.HOST_NAME_ERROR);
+            }
+        });
+        synchronized (cloudManager) {
+            try {
+                cloudManager.wait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //</editor-fold>
+        //<editor-fold desc="Loader Patch Update">
         // Loader Patch Update
         System.out.println("Updating Splint Loader...");
         cloudManager.getLatestLoaderPatch(preferences.getLoaderSha(), new CloudManager.CloudResponseListener() {
@@ -192,7 +245,7 @@ public class Main {
                         System.exit(ExitCodes.PATCH_UPDATE_ERROR);
                     }
                 } else {
-                    System.out.println("No New Loader Patch Found.");
+                    System.out.println("Splint Loader already up to date.");
                 }
                 synchronized (cloudManager) {
                     cloudManager.notifyAll();
@@ -218,6 +271,8 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        //</editor-fold>
+        //<editor-fold desc="URI Patch Update">
         // URI Patch Update.
         System.out.println("Updating URI Patcher...");
         cloudManager.getLatestURIPatch(preferences.getUriSha(), new CloudManager.CloudResponseListener() {
@@ -237,7 +292,7 @@ public class Main {
                         System.exit(ExitCodes.PATCH_UPDATE_ERROR);
                     }
                 } else {
-                    System.out.println("No New URI Patcher Found.");
+                    System.out.println("URI Patcher already up to date.");
                 }
                 synchronized (cloudManager) {
                     cloudManager.notifyAll();
@@ -263,6 +318,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        //</editor-fold>
         System.out.println("Your Splint installation is now up to date.");
     }
 
@@ -296,6 +352,40 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Error reading patch manifest");
             System.exit(ExitCodes.BAD_PATCH_FILE);
+        }
+    }
+
+    private static void downloadFile(String remoteUrl, String destinationDir, String destinationName, String itemName) {
+        try {
+            URL url = new URL(remoteUrl);
+            HttpsURLConnection httpsConnection = (HttpsURLConnection) (url.openConnection());
+            httpsConnection.setRequestMethod("GET");
+            httpsConnection.setRequestProperty("User-Agent", CloudManager.USER_AGENT);
+            httpsConnection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+            long completeFileSize = httpsConnection.getContentLength();
+            BufferedInputStream in = new BufferedInputStream(httpsConnection.getInputStream());
+            File folder = new File(destinationDir);
+            if (!folder.exists()) {
+                if (!folder.mkdir()) System.exit(7);
+            }
+            FileOutputStream fos = new FileOutputStream(destinationDir + destinationName);
+            BufferedOutputStream bout = new BufferedOutputStream(fos, 1024);
+            byte[] data = new byte[1024];
+            long downloadedFileSize = 0;
+            int x;
+            while ((x = in.read(data, 0, 1024)) >= 0) {
+                downloadedFileSize += x;
+                final int currentProgress = (int) ((((double) downloadedFileSize) / ((double) completeFileSize)) * 100d);
+                System.out.write(("\rDownloading " + itemName + " " + currentProgress + "%").getBytes());
+                bout.write(data, 0, x);
+            }
+            System.out.println();
+            bout.close();
+            in.close();
+        } catch (Exception e) {
+            System.err.println("Error Downloading " + itemName);
+            System.exit(ExitCodes.ERROR_IN_DOWNLOAD);
         }
     }
 

@@ -61,6 +61,10 @@ public class CloudManager {
         fetch(CLIENT_API + "getLatestURIPatch", parameters, headers, listener);
     }
 
+    public void getLatestSDKVersion(CloudResponseListener listener) {
+        fetch(CLIENT_API + "getLatestSDKVersion", null, listener);
+    }
+
     private void fetch(String url, ArrayList<String> headers, final CloudResponseListener listener) {
         Thread httpThread = new Thread() {
             @SuppressWarnings("unchecked")

@@ -15,4 +15,5 @@ public class ExitCodes {
     static final int PATCH_TAMPER_ERROR = 10;
     static final int MITM_ATTACK_ERROR = 11;
     static final int PATCH_UPDATE_ERROR = 12;
+    static final int ERROR_IN_DOWNLOAD = 13;
 }

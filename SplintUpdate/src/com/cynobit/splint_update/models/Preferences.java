@@ -15,6 +15,7 @@ public class Preferences {
      */
     private static String LOADER_SHA = "loader_sha";
     private static String URI_SHA = "uri_sha";
+    private static String SDK_VERSION = "splint_sdk_version";
 
     public Preferences(String appRoot) throws IllegalArgumentException {
         if (appRoot == null) throw new IllegalArgumentException("Null argument given.");
@@ -54,12 +55,20 @@ public class Preferences {
         return getValueFromJson(URI_SHA, "0000000").toString();
     }
 
+    public String getSDKVersion() {
+        return getValueFromJson(SDK_VERSION, "v0.0.0").toString();
+    }
+
     public void setLoaderSha(String sha) {
         putValueInJson(LOADER_SHA, sha);
     }
 
     public void setUriSha(String sha) {
         putValueInJson(URI_SHA, sha);
+    }
+
+    public void setSDKVersion(String version) {
+        putValueInJson(SDK_VERSION, version);
     }
 
     public void commit() {
