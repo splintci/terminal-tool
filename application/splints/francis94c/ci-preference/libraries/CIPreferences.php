@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+class UnsupportedOperationException extends Exception {}
+
 class CIPreferences {
 
   /**
@@ -63,6 +65,30 @@ class CIPreferences {
    */
   function getFileName() {
     return $this->file_name;
+  }
+  /**
+   * [increment description]
+   * @param  [type]  $key [description]
+   * @param  integer $val [description]
+   * @return [type]       [description]
+   */
+  function increment($key, $val=1) {
+    if (!is_numeric($val)) throw new UnexpectedValueException("Non Numeric Value Given.");
+    if (is_numeric($this->prefs[$key])) {
+      $this->prefs[$key] = ((int) $this->prefs[$key]) + $val;
+      return;
+    }
+    throw new UnsupportedOperationException("Trying to perform an increment of a String value.");
+  }
+  /**
+   * [concat description]
+   * @param  [type] $key [description]
+   * @param  [type] $val [description]
+   * @return [type]      [description]
+   */
+  function concat($key, $val) {
+    if (!isset($this->prefs[$key])) $this->prefs[$key] = "";
+    $this->prefs[$key] .= $val;
   }
   /**
    * [set description]

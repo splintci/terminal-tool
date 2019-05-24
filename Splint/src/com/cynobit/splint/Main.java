@@ -154,8 +154,10 @@ public class Main {
                     SplintCore.refreshRootSplintJSONFile();
                     System.out.println("Done Installing Packages.");
                 } else {
-                    parser.printUsage(System.out);
-                    System.exit(0);
+                    if (arguments.length < 1) {
+                        parser.printUsage(System.out);
+                        System.exit(0);
+                    }
                 }
             }
             // >_splint -i vendor/package .../... .../...
@@ -199,6 +201,8 @@ public class Main {
             } else if (patch) {
                 noPatch = true;
                 SplintCore.patchLoader(true);
+                SplintCore.patchUri(true);
+                System.out.println("Distribution patching complete.");
             } else if (projectName != null) {
                 SplintCore.createCIProject(projectName, noPatch);
                 noPatch = true;
@@ -206,7 +210,11 @@ public class Main {
                 noPatch = true;
                 System.out.println("Splint v" + Main.BUILD_VERSION);
             }
-            if (!noPatch) SplintCore.patchLoader(forcePatch);
+            if (!noPatch) {
+                SplintCore.patchLoader(forcePatch);
+                SplintCore.patchUri(forcePatch);
+                System.out.println("Distribution patching complete.");
+            }
         } catch (CmdLineException e) {
             System.out.println("Unable to parse command line arguments");
             System.exit(ExitCodes.BAD_ARGUMENTS);

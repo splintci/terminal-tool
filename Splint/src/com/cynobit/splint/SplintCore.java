@@ -181,7 +181,28 @@ class SplintCore {
             System.err.println("There was an problem patching your Code Igniter distribution");
             System.exit(ExitCodes.PATCHING_ERROR);
         }
-        System.out.println("Distribution patching complete.");
+    }
+
+    static void patchUri(boolean forcePatch) {
+        System.out.println("Patching application Uri class...");
+        File coreDir = new File(System.getProperty("user.dir") + "/application/core");
+        if (!coreDir.isDirectory()) {
+            System.err.println("'application/core' folder does not exist.");
+            System.exit(ExitCodes.NO_CORE_FOLDER);
+        }
+        try {
+            if (!new File(coreDir, "MY_Uri.php").exists()) {
+                Files.copy(new File(Main.appRoot + "modifiers/MY_Uri.php").toPath(),
+                        new File(System.getProperty("user.dir") + "/application/core/MY_Uri.php").toPath());
+            } else {
+                if (forcePatch) Files.copy(new File(Main.appRoot + "modifiers/MY_Uri.php").toPath(),
+                        new File(System.getProperty("user.dir") + "/application/core/MY_Uri.php").toPath(),
+                        StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (Exception e) {
+            System.err.println("There was an problem patching your Code Igniter distribution");
+            System.exit(ExitCodes.PATCHING_ERROR);
+        }
     }
 
     @Nullable
@@ -276,8 +297,9 @@ class SplintCore {
             zipFile.extractAll(System.getProperty("user.dir") + "/" + name);
             if (noPatch) {
                 System.out.println("Un-Patching Loader class...");
-                File patchLoader = new File(System.getProperty("user.dir") + "/" + name + "/application/core/MY_Loader.php");
-                if (!patchLoader.delete()) {
+                File loaderPatch = new File(System.getProperty("user.dir") + "/" + name + "/application/core/MY_Loader.php");
+                File uriPatch = new File(System.getProperty("user.dir") + "/" + name + "/application/core/MY_Uri.php");
+                if (!loaderPatch.delete() || !uriPatch.delete()) {
                     System.err.println("Could not Un-Patch Code-Igniter project.");
                     System.exit(ExitCodes.UN_PATCH_FAILED);
                 }
