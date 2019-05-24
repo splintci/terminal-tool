@@ -1,4 +1,39 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+/**
+ * Splint
+ *
+ * An open source package and dependency manager for Code Igniter (an open
+ * source application development framework for PHP).
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	Splint
+ * @author  Splint Dev Team
+ * @license	https://opensource.org/licenses/MIT	MIT License
+ * @link	https://splint.cynobit.com
+ * @since	Version 0.0.1
+*/
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * [MY_Loader description]
@@ -6,10 +41,22 @@
 class MY_Loader extends CI_Loader {
 
   /**
-   * [splint description]
-   * @param  [type] $splint   [description]
-   * @param  array  $autoload [description]
-   * @return [type]           [description]
+   * splint  The funcnction that loads resources from a splint package.
+   *
+   * @param  string $splint   Package name (Splint or Identifier) of thee
+   *                          package to load resources from.
+   * @param  mixed  $autoload An assocative array of resources to load or a
+   *                          single string of the resource to load with the
+   *                          first character indicating the kind of resource to
+   *                          load. See http://splint.cynobit.com/wiki/load_splint
+   * @param  mixed   $params  (Optional) An associative array of key value pairs
+   *                          to pass to the constructor of a loaded class or as
+   *                          values to views, depending on the type of resource
+   *                          loaded.
+   * @param  string  $alias   (Optional) The alias to be given to the loaded Class or Model.
+   *
+   * @return object           Returns a Splint object if only one argument is
+   *                          provided.
    */
   function splint($splint, $autoload = array(), $params = null, $alias = null) {
     $splint = trim($splint, '/');
@@ -45,6 +92,8 @@ class MY_Loader extends CI_Loader {
       }
       return true;
     }
+
+    // We recieved an array.
     foreach ($autoload as $type => $arg) {
       if ($type == 'library') {
         if (is_array($arg)) {
@@ -71,9 +120,15 @@ class MY_Loader extends CI_Loader {
     }
   }
   /**
-   * [package description]
-   * @param  [type] $splint [description]
-   * @return [type]         [description]
+   * package This function loads a package by loading the resources specified in
+   *         package descriptor as specified.
+   *
+   * @param  string $splint The qualified name of the Splint package e.g.
+   *                        zoey/bootstrap.
+   *
+   * @return int            The number of resources loaded. This function
+   *                        returns false if the specified package doesn't
+   *                        exist.
    */
   function package($splint) {
     $splint = trim($splint, '/');
@@ -81,8 +136,12 @@ class MY_Loader extends CI_Loader {
       show_error("Cannot find splint '$splint'");
       return false;
     }
+
+    // Get Descriptor
     $descriptor = json_decode(file_get_contents(APPPATH . "splints/$splint/splint.json"));
     $loadedCount = 0;
+
+    // Begin Check.
     if (isset($descriptor->autoload)) {
       // Libraries.
       if (isset($descriptor->autoload->libraries) && is_array($descriptor->autoload->libraries)) {
@@ -138,8 +197,122 @@ class MY_Loader extends CI_Loader {
     return $loadedCount > 0;
   }
   /**
-   * [_ci_autoloader description]
-   * @return [type] [description]
+   * app Loads and renders a Splint Application, applications behave as required
+   *     based on the current URI.
+   *
+   * @param  string $splint The fully qualified name of the Splint Application
+   *                        Package to use.
+   * @param  mixed  $data   (Optional) An associative array of parameters to
+   *                        pass to the constructor of the controller called
+   *                        within the application.
+   *
+   * @return bool           Returns true on successful loading or false
+   *                        otherwise.
+   */
+  function app($splint, $data=null) {
+    // Load App Router.
+    //$this->splint("splint/platform", "+AppRouter", array("splint" => $splint) , "approuter");
+    if (file_exists(APPPATH.'splints/splint/platform/libraries/AppRouter.php')) {
+      include(APPPATH.'splints/splint/platform/libraries/AppRouter.php');
+      $approuter = new AppRouter(array("splint" => $splint));
+    } else {
+      show_error("Platform Support Package not found.");
+      return false;
+    }
+    // Include App Controller Parent Class
+    if (file_exists(APPPATH.'splints/splint/platform/libraries/SplintAppController.php')) {
+      include(APPPATH.'splints/splint/platform/libraries/SplintAppController.php');
+    } else {
+      show_error("Platform Support Package not found.");
+      return false;
+    }
+
+    $ci =& get_instance();
+    $e404 = FALSE;
+	  $class = ucfirst($approuter->class);
+	  $method = $approuter->method;
+
+    // Checks and Flag Setting.
+    if (empty($class) OR ! file_exists(APPPATH."splints/$splint/controllers/".$approuter->directory.$class.'.php'))	{
+      $e404 = TRUE;
+    }	else {
+      // Require Specified Controller
+      require_once(APPPATH."splints/$splint/controllers/".$approuter->directory.$class.'.php');
+      // Further Checks.
+      if (!class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method)) {
+        $e404 = TRUE;
+      }	elseif (method_exists($class, '_remap')) {
+        $params = array($method, array_slice($ci->uri->apprsegments, 2));
+			  $method = '_remap';
+      } elseif (!method_exists($class, $method)) {
+        $e404 = TRUE;
+      } elseif (!is_callable(array($class, $method)))	{
+        $reflection = new ReflectionMethod($class, $method);
+        if ( ! $reflection->isPublic() OR $reflection->isConstructor())	{
+          $e404 = TRUE;
+        }
+      }
+    }
+
+    if ($e404) {
+      if (!empty($approuter->routes['404_override'])) {
+        if (sscanf($approuter->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)	{
+          $error_method = 'index';
+			  }
+        $error_class = ucfirst($error_class);
+        if (!class_exists($error_class, FALSE)) {
+          if (file_exists(APPPATH."splints/$splint/controllers/".$approuter->directory.$error_class.'.php')) {
+            require_once(APPPATH."splints/$splint/controllers/".$approuter->directory.$error_class.'.php');
+					  $e404 = ! class_exists($error_class, FALSE);
+				  }	elseif (!empty($approuter->directory) && file_exists(APPPATH."splints/$splint/controllers/".$error_class.'.php'))	{
+            require_once(APPPATH."splints/$splint/controllers/".$error_class.'.php');
+				 	  if (($e404 = ! class_exists($error_class, FALSE)) === FALSE) {
+              $approuter->directory = '';
+					  }
+				  }
+			  }	else {
+				  $e404 = FALSE;
+			  }
+		  }
+		  // Did we reset the $e404 flag? If so, set the rsegments, starting from index 1
+		  if (!$e404)	{
+        $class = $error_class;
+			  $method = $error_method;
+			  $ci->uri->apprsegments = array(
+				  1 => $class,
+				  2 => $method
+			  );
+		  } else {
+			  show_404($approuter->directory.$class.'/'.$method);
+		  }
+	  }
+
+	  if ($method !== '_remap')	{
+		  $params = array_slice($ci->uri->apprsegments, 2);
+	  }
+
+    // TODO: pre-hook
+    //$EXT->call_hook('pre_controller');
+
+    // Mark a start point so we can benchmark the app controller
+    $ci->benchmark->mark('app_controller_execution_time_( '.$class.' / '.$method.' )_start');
+
+    $APP = new $class($splint, is_array($data) && $this->is_assoc($data) ? $data : null);
+
+    // TODO: post-hook
+    //$EXT->call_hook('post_controller_constructor');
+
+    // Call App Controller.
+    call_user_func_array(array(&$APP, $method), $params);
+
+    // Mark an end point so we can benchmark the app controller
+    $ci->benchmark->mark('app_controller_execution_time_( '.$class.' / '.$method.' )_end');
+  }
+  /**
+   * [_ci_autoloader The Ripped Code Igniter autoloader modified at the bottom
+   *                 to load Splint packages.
+   *
+   * @return null
    */
   function _ci_autoloader() {
     if (file_exists(APPPATH.'config/autoload.php')) {
@@ -202,8 +375,10 @@ class MY_Loader extends CI_Loader {
   /**
    * [bind   creates a Splint object and optionally binds the object to a passed
    *         variable]
+   *
    * @param  string $splint Splint package name.
    * @param  object $bind   Optional variable to bind Splint object to.
+   *
    * @return object         [Optional] Returns a Splint oject if no argument is
    *                        passed for $bind.
    */

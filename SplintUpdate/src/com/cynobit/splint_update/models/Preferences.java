@@ -13,8 +13,8 @@ public class Preferences {
     /**
      * Keys
      */
-    private static String DB_VERSION = "db_version";
-    private static String FMD_BATCH = "fmd_batch";
+    private static String LOADER_SHA = "loader_sha";
+    private static String URI_SHA = "uri_sha";
 
     public Preferences(String appRoot) throws IllegalArgumentException {
         if (appRoot == null) throw new IllegalArgumentException("Null argument given.");
@@ -47,11 +47,19 @@ public class Preferences {
     }
 
     public String getLoaderSha() {
-        return getValueFromJson("loader_sha", "0000000").toString();
+        return getValueFromJson(LOADER_SHA, "0000000").toString();
+    }
+
+    public String getUriSha() {
+        return getValueFromJson(URI_SHA, "0000000").toString();
     }
 
     public void setLoaderSha(String sha) {
-        putValueInJson("loader_sha", sha);
+        putValueInJson(LOADER_SHA, sha);
+    }
+
+    public void setUriSha(String sha) {
+        putValueInJson(URI_SHA, sha);
     }
 
     public void commit() {

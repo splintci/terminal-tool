@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    private final static String BUILD_VERSION = "0.0.2";
+    private final static String BUILD_VERSION = "0.0.3";
     private final static String ENVIRONMENT = "PRODUCTION";
 
     private static final CloudManager cloudManager = CloudManager.getInstance();
@@ -193,6 +193,51 @@ public class Main {
                     }
                 } else {
                     System.out.println("No New Loader Patch Found.");
+                }
+                synchronized (cloudManager) {
+                    cloudManager.notifyAll();
+                }
+            }
+
+            @Override
+            public void onServerError(int responseCode) {
+                System.err.println("There was an error communicating with the server");
+                System.exit(ExitCodes.SERVER_ERROR);
+            }
+
+            @Override
+            public void onNetworkError() {
+                System.err.println("Could not resolve host name.");
+                System.exit(ExitCodes.HOST_NAME_ERROR);
+            }
+        });
+        synchronized (cloudManager) {
+            try {
+                cloudManager.wait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // URI Patch Update.
+        System.out.println("Updating URI Patcher...");
+        cloudManager.getLatestURIPatch(preferences.getUriSha(), new CloudManager.CloudResponseListener() {
+            @Override
+            public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
+                if (!response.equals("*")) {
+                    try {
+                        FileOutputStream outputStream = new FileOutputStream(appRoot + "modifiers/MY_Uri.php", false);
+                        byte[] strToBytes = DatatypeConverter.parseBase64Binary(response);
+                        outputStream.write(strToBytes);
+                        outputStream.close();
+                        preferences.setUriSha(headers.get(0).getValue());
+                        preferences.commit();
+                        System.out.println("URI Patcher Updated.");
+                    } catch (Exception e) {
+                        System.err.println("Error URI Patcher File.");
+                        System.exit(ExitCodes.PATCH_UPDATE_ERROR);
+                    }
+                } else {
+                    System.out.println("No New URI Patcher Found.");
                 }
                 synchronized (cloudManager) {
                     cloudManager.notifyAll();
