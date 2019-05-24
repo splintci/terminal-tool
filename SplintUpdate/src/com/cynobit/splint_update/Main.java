@@ -29,6 +29,8 @@ public class Main {
     private static String appRoot = null;
     private static Preferences preferences;
 
+    private static boolean modified = false;
+
     public static void main(String[] args) {
         // Initialize
         try {
@@ -162,6 +164,7 @@ public class Main {
                 System.out.println("Installing Update...");
                 if (getMD5Checksum(appRoot + "updates/" + "patch-" + cloudVersion[0] + ".zip").equals(updateHash[0])) {
                     installPatch(cloudVersion[0]);
+                    modified = true;
                 } else {
                     System.err.println("Hash un-matched, possible MITM attack!");
                     System.exit(ExitCodes.MITM_ATTACK_ERROR);
@@ -191,6 +194,7 @@ public class Main {
                             preferences.setSDKVersion(object.getString("version"));
                             preferences.commit();
                             System.out.println("Splint SDK Updated.");
+                            modified = true;
                         } else {
                             System.out.println("SDK already up to date.");
                         }
@@ -240,6 +244,7 @@ public class Main {
                         preferences.setLoaderSha(headers.get(0).getValue());
                         preferences.commit();
                         System.out.println("Splint Loader Updated.");
+                        modified = true;
                     } catch (Exception e) {
                         System.err.println("Error Updating Patch File.");
                         System.exit(ExitCodes.PATCH_UPDATE_ERROR);
@@ -287,6 +292,7 @@ public class Main {
                         preferences.setUriSha(headers.get(0).getValue());
                         preferences.commit();
                         System.out.println("URI Patcher Updated.");
+                        modified = true;
                     } catch (Exception e) {
                         System.err.println("Error URI Patcher File.");
                         System.exit(ExitCodes.PATCH_UPDATE_ERROR);
@@ -319,7 +325,8 @@ public class Main {
             }
         }
         //</editor-fold>
-        System.out.println("Your Splint installation is now up to date.");
+
+        System.out.println("Your Splint installation is " + (modified ? "now" : "already") + " up to date.");
     }
 
     private static void installPatch(String version) {
