@@ -339,6 +339,7 @@ public class Main {
         }
         try {
             JSONObject manifest = readJSONFromFile(appRoot + "updates/sink/manifest.json");
+            assert manifest != null;
             if (!manifest.getString("version").equals(version)) {
                 System.err.println("Bad Patch File.");
                 System.exit(ExitCodes.MANIFEST_ERROR);

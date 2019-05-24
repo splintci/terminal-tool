@@ -8,8 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" afterPath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,15 +80,17 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="29" column="43" lean-forward="false" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+            <state relative-caret-position="457">
+              <caret line="327" column="0" lean-forward="false" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12053#12092#0" expanded="false" />
+                <element signature="e#7738#7778#0" expanded="false" />
+                <element signature="e#10107#10149#0" expanded="false" />
+                <element signature="e#12222#12261#0" expanded="false" />
                 <element signature="method#installPatch#0;class#Main#0" expanded="false" />
                 <element signature="method#readJSONFromFile#0;class#Main#0" expanded="false" />
                 <element signature="method#getMD5Checksum#0;class#Main#0" expanded="false" />
-                <element signature="e#18811#18850#0" expanded="true" />
+                <element signature="e#19057#19096#0" expanded="true" />
                 <element signature="method#printLog#0;class#Main#0" expanded="false" />
               </folding>
             </state>
@@ -1267,15 +1268,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="29" column="43" lean-forward="false" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+        <state relative-caret-position="457">
+          <caret line="327" column="0" lean-forward="false" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#12053#12092#0" expanded="false" />
+            <element signature="e#7738#7778#0" expanded="false" />
+            <element signature="e#10107#10149#0" expanded="false" />
+            <element signature="e#12222#12261#0" expanded="false" />
             <element signature="method#installPatch#0;class#Main#0" expanded="false" />
             <element signature="method#readJSONFromFile#0;class#Main#0" expanded="false" />
             <element signature="method#getMD5Checksum#0;class#Main#0" expanded="false" />
-            <element signature="e#18811#18850#0" expanded="true" />
+            <element signature="e#19057#19096#0" expanded="true" />
             <element signature="method#printLog#0;class#Main#0" expanded="false" />
           </folding>
         </state>
