@@ -38,6 +38,7 @@ Name: "{app}\packages"; Permissions: users-full
 Name: "{app}\modifiers"; Permissions: users-full
 Name: "{app}\updates"; Permissions: users-full
 Name: "{app}\updates\sink"; Permissions: users-full
+Name: "{app}\modifiers\sink"; Permissions: users-full
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

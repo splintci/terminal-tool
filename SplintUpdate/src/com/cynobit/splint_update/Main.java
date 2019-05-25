@@ -16,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Created by Francis Ilechukwu 2/25/2019.
@@ -32,6 +34,7 @@ public class Main {
     private static boolean modified = false;
 
     public static void main(String[] args) {
+        //<editor-fold desc="Initialize">
         // Initialize
         try {
             appRoot = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath() + "\\";
@@ -41,6 +44,8 @@ public class Main {
             System.exit(ExitCodes.ROOT_PATH_ERROR);
         }
         preferences = new Preferences(appRoot);
+        //</editor-fold>
+        //<editor-fold desc="Binaries Patcher">
         // Get Current Version of Splint Binary.
         System.out.println("Checking for updates...");
         String residentVersion = "0.0.0";
@@ -177,6 +182,7 @@ public class Main {
         } else {
             System.out.println("No Updates Found.");
         }
+        //</editor-fold>
         //<editor-fold desc="Splint SDK Update">
         // SDK Patch Update
         System.out.println("Updating Splint SDK...");
@@ -189,8 +195,31 @@ public class Main {
                         if (object.getString("version").compareToIgnoreCase(preferences.getSDKVersion()) > 0) {
                             downloadFile(
                                     "https://github.com/splintci/sdk/archive/" + object.getString("version") + ".zip",
-                                    appRoot + "modifiers/", "splint-sdk.zip",
+                                    appRoot + "modifiers/", "sdk-binaries.zip",
                                     "Splint SDK " + object.getString("version"));
+                            System.out.println("Unpacking SDK...");
+                            try {
+                                ZipFile zipFile = new ZipFile(appRoot + "modifiers/sdk-binaries.zip");
+                                zipFile.extractAll(appRoot + "modifiers/sink");
+                            } catch (Exception e) {
+                                System.err.println("Problem extracting patch");
+                                System.exit(ExitCodes.EXTRACTION_ERROR);
+                            }
+                            System.out.println("Updating Loader...");
+                            Files.copy(new File(appRoot + "modifiers/sink/sdk-" + object.getString("version").substring(1) + "/application/core/MY_Loader.php").toPath(),
+                                    new File(appRoot + "modifiers/MY_Loader.php").toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            System.out.println("Updating Uri Patcher...");
+                            Files.copy(new File(appRoot + "modifiers/sink/sdk-" + object.getString("version").substring(1) + "/application/core/MY_Uri.php").toPath(),
+                                    new File(appRoot + "modifiers/MY_Uri.php").toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            System.out.println("Packing SDK...");
+                            zipDirectory(
+                                    appRoot + "modifiers/sink/sdk-" + object.getString("version").substring(1),
+                                    appRoot + "modifiers/splint-sdk.zip");
+                            System.out.println("Cleaning Up...");
+                            //noinspection ResultOfMethodCallIgnored
+                            new File(appRoot + "modifiers/sdk-binaries.zip").delete();
+                            silentDelete(new File(appRoot + "modifiers/sink/sdk-" + object.getString("version").substring(1)));
+                            System.out.println("Done Packing SDK.");
                             preferences.setSDKVersion(object.getString("version"));
                             preferences.commit();
                             System.out.println("Splint SDK Updated.");
@@ -202,6 +231,7 @@ public class Main {
                         System.out.println("Could not obtain recent SDK version.");
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     System.err.println("There was an error parsing the server response.");
                 }
                 synchronized (cloudManager) {
@@ -229,103 +259,6 @@ public class Main {
             }
         }
         //</editor-fold>
-        //<editor-fold desc="Loader Patch Update">
-        // Loader Patch Update
-        System.out.println("Updating Splint Loader...");
-        cloudManager.getLatestLoaderPatch(preferences.getLoaderSha(), new CloudManager.CloudResponseListener() {
-            @Override
-            public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
-                if (!response.equals("*")) {
-                    try {
-                        FileOutputStream outputStream = new FileOutputStream(appRoot + "modifiers/MY_Loader.php", false);
-                        byte[] strToBytes = DatatypeConverter.parseBase64Binary(response);
-                        outputStream.write(strToBytes);
-                        outputStream.close();
-                        preferences.setLoaderSha(headers.get(0).getValue());
-                        preferences.commit();
-                        System.out.println("Splint Loader Updated.");
-                        modified = true;
-                    } catch (Exception e) {
-                        System.err.println("Error Updating Patch File.");
-                        System.exit(ExitCodes.PATCH_UPDATE_ERROR);
-                    }
-                } else {
-                    System.out.println("Splint Loader already up to date.");
-                }
-                synchronized (cloudManager) {
-                    cloudManager.notifyAll();
-                }
-            }
-
-            @Override
-            public void onServerError(int responseCode) {
-                System.err.println("There was an error communicating with the server");
-                System.exit(ExitCodes.SERVER_ERROR);
-            }
-
-            @Override
-            public void onNetworkError() {
-                System.err.println("Could not resolve host name.");
-                System.exit(ExitCodes.HOST_NAME_ERROR);
-            }
-        });
-        synchronized (cloudManager) {
-            try {
-                cloudManager.wait();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        //</editor-fold>
-        //<editor-fold desc="URI Patch Update">
-        // URI Patch Update.
-        System.out.println("Updating URI Patcher...");
-        cloudManager.getLatestURIPatch(preferences.getUriSha(), new CloudManager.CloudResponseListener() {
-            @Override
-            public void onResponseReceived(String response, ArrayList<Pair<String, String>> headers) {
-                if (!response.equals("*")) {
-                    try {
-                        FileOutputStream outputStream = new FileOutputStream(appRoot + "modifiers/MY_Uri.php", false);
-                        byte[] strToBytes = DatatypeConverter.parseBase64Binary(response);
-                        outputStream.write(strToBytes);
-                        outputStream.close();
-                        preferences.setUriSha(headers.get(0).getValue());
-                        preferences.commit();
-                        System.out.println("URI Patcher Updated.");
-                        modified = true;
-                    } catch (Exception e) {
-                        System.err.println("Error URI Patcher File.");
-                        System.exit(ExitCodes.PATCH_UPDATE_ERROR);
-                    }
-                } else {
-                    System.out.println("URI Patcher already up to date.");
-                }
-                synchronized (cloudManager) {
-                    cloudManager.notifyAll();
-                }
-            }
-
-            @Override
-            public void onServerError(int responseCode) {
-                System.err.println("There was an error communicating with the server");
-                System.exit(ExitCodes.SERVER_ERROR);
-            }
-
-            @Override
-            public void onNetworkError() {
-                System.err.println("Could not resolve host name.");
-                System.exit(ExitCodes.HOST_NAME_ERROR);
-            }
-        });
-        synchronized (cloudManager) {
-            try {
-                cloudManager.wait();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        //</editor-fold>
-
         System.out.println("Your Splint installation is " + (modified ? "now" : "already") + " up to date.");
     }
 
@@ -360,6 +293,35 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Error reading patch manifest");
             System.exit(ExitCodes.BAD_PATCH_FILE);
+        }
+    }
+
+    private static void silentDelete(File file) {
+        if (file.isDirectory()) {
+            //noinspection ConstantConditions
+            if (file.list().length == 0) {
+                //noinspection ResultOfMethodCallIgnored
+                file.delete();
+            } else {
+                // List all the directory contents
+                String files[] = file.list();
+                //noinspection ConstantConditions
+                for (String temp : files) {
+                    //construct the file structure
+                    File fileDelete = new File(file, temp);
+                    //recursive delete
+                    silentDelete(fileDelete);
+                }
+                // Check the directory again, if empty then delete it
+                //noinspection ConstantConditions
+                if (file.list().length == 0) {
+                    //noinspection ResultOfMethodCallIgnored
+                    file.delete();
+                }
+            }
+        } else {
+            //noinspection ResultOfMethodCallIgnored
+            file.delete();
         }
     }
 
@@ -432,6 +394,51 @@ public class Main {
             result.append(Integer.toString((aB & 0xff) + 0x100, 16).substring(1));
         }
         return result.toString();
+    }
+
+    private static void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
+        if (fileToZip.isHidden()) {
+            return;
+        }
+        if (fileToZip.isDirectory()) {
+            if (fileName.endsWith("/")) {
+                zipOut.putNextEntry(new ZipEntry(fileName));
+                zipOut.closeEntry();
+            } else {
+                zipOut.putNextEntry(new ZipEntry(fileName + "/"));
+                zipOut.closeEntry();
+            }
+            File[] children = fileToZip.listFiles();
+            for (File childFile : children) {
+                zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
+            }
+            return;
+        }
+        FileInputStream fis = new FileInputStream(fileToZip);
+        ZipEntry zipEntry = new ZipEntry(fileName);
+        zipOut.putNextEntry(zipEntry);
+        byte[] bytes = new byte[1024];
+        int length;
+        while ((length = fis.read(bytes)) >= 0) {
+            zipOut.write(bytes, 0, length);
+        }
+        fis.close();
+    }
+
+    private static boolean zipDirectory(String dir, String outputZip) {
+        try {
+            FileOutputStream fos = new FileOutputStream(outputZip);
+            ZipOutputStream zipOut = new ZipOutputStream(fos);
+            File[] files = new File(dir).listFiles();
+            for (File file : files) {
+                zipFile(file, file.getName(), zipOut);
+            }
+            zipOut.close();
+            fos.close();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings("ConstantConditions")
