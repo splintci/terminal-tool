@@ -3,9 +3,9 @@ package com.cynobit.splint.models;
 import com.cynobit.splint.Main;
 import javafx.util.Pair;
 
-//import javax.net.ssl.HttpURLConnection;
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
-import java.net.HttpURLConnection;
+//import java.net.HttpsURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ import java.util.List;
 public class CloudManager {
 
     public static final String USER_AGENT = Main.APP_NAME;
-    //private static final String URL = "https://splint.cynobit.com/";
-    private static final String URL = "http://127.0.0.1/splint.cynobit.com/";
+    private static final String URL = "https://splint.cynobit.com/";
+    //private static final String URL = "http://127.0.0.1/splint.cynobit.com/";
     public static final String API = URL + "index.php/SplintClient/";
     private static volatile CloudManager cloudManager;
 
@@ -54,7 +54,7 @@ public class CloudManager {
             public void run() {
                 try {
                     URL obj = new URL(url);
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                    HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
                     //add request header
                     con.setRequestMethod("GET");
@@ -95,7 +95,7 @@ public class CloudManager {
             public void run() {
                 try {
                     URL obj = new URL(url);
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                    HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
                     //add request header
                     con.setRequestMethod("POST");
@@ -154,7 +154,7 @@ public class CloudManager {
             public void run() {
                 try {
                     URL obj = new URL(url);
-                    HttpURLConnection urlConnection = (HttpURLConnection) obj.openConnection();
+                    HttpsURLConnection urlConnection = (HttpsURLConnection) obj.openConnection();
                     String boundaryString = "----SSVPDataBase";
 
                     urlConnection.setDoOutput(true);
