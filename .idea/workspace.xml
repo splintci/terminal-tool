@@ -7,7 +7,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/installerX64.iss" afterPath="$PROJECT_DIR$/dist/installerX64.iss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/installerX86.iss" afterPath="$PROJECT_DIR$/dist/installerX86.iss" />
+    </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -65,25 +68,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+            <state relative-caret-position="170">
+              <caret line="22" column="54" lean-forward="false" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Preferences.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
-              <folding>
-                <element signature="e#1806#1807#0" expanded="true" />
-                <element signature="e#1858#1859#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -101,31 +91,51 @@
       <file leaf-file-name="CloudManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-67">
-              <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+            <state relative-caret-position="340">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#262#312#0" expanded="true" />
-                <element signature="e#1906#3373#0" expanded="true" />
-                <element signature="e#3372#3373#0" expanded="true" />
-                <element signature="e#3414#3464#0" expanded="true" />
-                <element signature="e#3612#6016#0" expanded="true" />
-                <element signature="e#6015#6016#0" expanded="true" />
-                <element signature="e#6057#6096#0" expanded="true" />
-                <element signature="e#6248#9400#0" expanded="true" />
-                <element signature="e#9399#9400#0" expanded="true" />
-                <marker date="1558812271137" expanded="false" signature="9444:9483" ph="/ConstantConditions/" />
-                <marker date="1558812271137" expanded="false" signature="10972:10987" ph=" { " />
-                <marker date="1558812271137" expanded="false" signature="10999:11009" ph=" }" />
-                <marker date="1558812271137" expanded="false" signature="11035:11050" ph=" { " />
-                <marker date="1558812271137" expanded="false" signature="11062:11072" ph=" }" />
-                <marker date="1558812271137" expanded="false" signature="11099:11114" ph=" { " />
-                <marker date="1558812271137" expanded="false" signature="11127:11137" ph=" }" />
-                <marker date="1558812271137" expanded="false" signature="11167:11182" ph=" { " />
-                <marker date="1558812271137" expanded="false" signature="11198:11208" ph=" }" />
-                <marker date="1558812271137" expanded="false" signature="11344:11359" ph=" { " />
-                <marker date="1558812271137" expanded="false" signature="11378:11388" ph=" }" />
+                <element signature="e#264#314#0" expanded="true" />
+                <element signature="e#1908#3377#0" expanded="true" />
+                <element signature="e#3376#3377#0" expanded="true" />
+                <element signature="e#3418#3468#0" expanded="true" />
+                <element signature="e#3616#6022#0" expanded="true" />
+                <element signature="e#6021#6022#0" expanded="true" />
+                <element signature="e#6063#6102#0" expanded="true" />
+                <element signature="e#6254#9408#0" expanded="true" />
+                <element signature="e#9407#9408#0" expanded="true" />
+                <marker date="1558819896893" expanded="false" signature="9452:9491" ph="/ConstantConditions/" />
+                <marker date="1558819896893" expanded="false" signature="10980:10995" ph=" { " />
+                <marker date="1558819896893" expanded="false" signature="11007:11017" ph=" }" />
+                <marker date="1558819896893" expanded="false" signature="11043:11058" ph=" { " />
+                <marker date="1558819896893" expanded="false" signature="11070:11080" ph=" }" />
+                <marker date="1558819896893" expanded="false" signature="11107:11122" ph=" { " />
+                <marker date="1558819896893" expanded="false" signature="11135:11145" ph=" }" />
+                <marker date="1558819896893" expanded="false" signature="11175:11190" ph=" { " />
+                <marker date="1558819896893" expanded="false" signature="11206:11216" ph=" }" />
+                <marker date="1558819896893" expanded="false" signature="11352:11367" ph=" { " />
+                <marker date="1558819896893" expanded="false" signature="11386:11396" ph=" }" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="installerX64.iss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dist/installerX64.iss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="installerX86.iss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/installerX86.iss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -147,16 +157,16 @@
       <find>Stream</find>
       <find>stream</find>
       <find>PATCH</find>
-      <find>HttpURLConnection</find>
       <find>patchLoader</find>
       <find>printUsage</find>
       <find>specialArgs</find>
       <find>HttpsURLConnection</find>
+      <find>HttpURLConnection</find>
     </findStrings>
     <replaceStrings>
       <replace>HashMap</replace>
-      <replace>HttpsURLConnection</replace>
       <replace>HttpURLConnection</replace>
+      <replace>HttpsURLConnection</replace>
     </replaceStrings>
   </component>
   <component name="FindManager">
@@ -177,7 +187,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/Controller.java" />
         <option value="$PROJECT_DIR$/src/com/cynobit/splint/Main.java" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -185,11 +194,14 @@
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/ExitCodes.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/ExitCodes.java" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java" />
+        <option value="$PROJECT_DIR$/dist/installerX64.iss" />
+        <option value="$PROJECT_DIR$/dist/installerX86.iss" />
       </list>
     </option>
   </component>
@@ -353,6 +365,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SplintGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SplintGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dist" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -831,7 +857,7 @@
     <option name="totallyTimeSpent" value="1302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -911,25 +937,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="71" column="17" lean-forward="false" selection-start-line="71" selection-start-column="17" selection-end-line="71" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#720#721#0" expanded="false" />
-            <element signature="e#761#762#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" column="45" lean-forward="true" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/cynobit/splint/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1206,13 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="25" column="47" lean-forward="false" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
@@ -1267,7 +1267,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1922#1952#0" expanded="true" />
-            <marker date="1558728362286" expanded="true" signature="7661:7748" ph="{...}" />
+            <marker date="1558819998497" expanded="true" signature="7661:7748" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1277,47 +1277,6 @@
         <state relative-caret-position="289">
           <caret line="17" column="44" lean-forward="false" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
-          <folding>
-            <element signature="e#1806#1807#0" expanded="true" />
-            <element signature="e#1858#1859#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-67">
-          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#262#312#0" expanded="true" />
-            <element signature="e#1906#3373#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-            <element signature="e#3414#3464#0" expanded="true" />
-            <element signature="e#3612#6016#0" expanded="true" />
-            <element signature="e#6015#6016#0" expanded="true" />
-            <element signature="e#6057#6096#0" expanded="true" />
-            <element signature="e#6248#9400#0" expanded="true" />
-            <element signature="e#9399#9400#0" expanded="true" />
-            <marker date="1558812271137" expanded="false" signature="9444:9483" ph="/ConstantConditions/" />
-            <marker date="1558812271137" expanded="false" signature="10972:10987" ph=" { " />
-            <marker date="1558812271137" expanded="false" signature="10999:11009" ph=" }" />
-            <marker date="1558812271137" expanded="false" signature="11035:11050" ph=" { " />
-            <marker date="1558812271137" expanded="false" signature="11062:11072" ph=" }" />
-            <marker date="1558812271137" expanded="false" signature="11099:11114" ph=" { " />
-            <marker date="1558812271137" expanded="false" signature="11127:11137" ph=" }" />
-            <marker date="1558812271137" expanded="false" signature="11167:11182" ph=" { " />
-            <marker date="1558812271137" expanded="false" signature="11198:11208" ph=" }" />
-            <marker date="1558812271137" expanded="false" signature="11344:11359" ph=" { " />
-            <marker date="1558812271137" expanded="false" signature="11378:11388" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1344,10 +1303,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="33" column="68" lean-forward="false" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+        <state relative-caret-position="170">
+          <caret line="22" column="54" lean-forward="false" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#264#314#0" expanded="true" />
+            <element signature="e#1908#3377#0" expanded="true" />
+            <element signature="e#3376#3377#0" expanded="true" />
+            <element signature="e#3418#3468#0" expanded="true" />
+            <element signature="e#3616#6022#0" expanded="true" />
+            <element signature="e#6021#6022#0" expanded="true" />
+            <element signature="e#6063#6102#0" expanded="true" />
+            <element signature="e#6254#9408#0" expanded="true" />
+            <element signature="e#9407#9408#0" expanded="true" />
+            <marker date="1558819896893" expanded="false" signature="9452:9491" ph="/ConstantConditions/" />
+            <marker date="1558819896893" expanded="false" signature="10980:10995" ph=" { " />
+            <marker date="1558819896893" expanded="false" signature="11007:11017" ph=" }" />
+            <marker date="1558819896893" expanded="false" signature="11043:11058" ph=" { " />
+            <marker date="1558819896893" expanded="false" signature="11070:11080" ph=" }" />
+            <marker date="1558819896893" expanded="false" signature="11107:11122" ph=" { " />
+            <marker date="1558819896893" expanded="false" signature="11135:11145" ph=" }" />
+            <marker date="1558819896893" expanded="false" signature="11175:11190" ph=" { " />
+            <marker date="1558819896893" expanded="false" signature="11206:11216" ph=" }" />
+            <marker date="1558819896893" expanded="false" signature="11352:11367" ph=" { " />
+            <marker date="1558819896893" expanded="false" signature="11386:11396" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/installerX86.iss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/installerX64.iss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
           <folding />
         </state>
       </provider>
