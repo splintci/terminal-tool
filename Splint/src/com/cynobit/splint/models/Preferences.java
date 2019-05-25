@@ -32,7 +32,6 @@ public class Preferences {
                 FileReader fileReader = new FileReader(prefFile);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 while ((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
                     builder.append(line);
                 }
                 bufferedReader.close();

@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class Main {
 
-    private final static String BUILD_VERSION = "0.0.6";
+    private final static String BUILD_VERSION = "0.0.7";
     private final static String ENVIRONMENT = "PRODUCTION";
 
     static String appRoot;
