@@ -11,6 +11,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -344,8 +345,47 @@ class SplintCore {
             System.err.println("Problem extracting package: " + identifier);
             System.exit(ExitCodes.EXTRACTION_ERROR);
         }
+        File descriptorFile = new File(System.getProperty("user.dir") + "/application/splints/" + identifier + "/splint.json");
+        if (descriptorFile.isFile()) {
+            JSONObject descriptor = readJSONFromFile(descriptorFile);
+            if (descriptor != null) {
+                try {
+                    if (descriptor.has("type") && (descriptor.getString("type").equals("application") || descriptor.getString("type").equals("app"))) {
+                        System.out.println("Moving application assets...");
+                        //noinspection ResultOfMethodCallIgnored
+                        new File(System.getProperty("user.dir") + "/splint-assets/" + identifier).mkdirs();
+                        File assetsDirectory = new File(System.getProperty("user.dir") + "/application/splints/" + identifier + "/assets");
+                        if (assetsDirectory.isDirectory()) {
+                            Files.move(assetsDirectory.toPath(), new File(System.getProperty("user.dir") + "/splint-assets/" + identifier).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            System.out.println("Successfully moved application assets.");
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println("Could not ascertain package type.");
+                }
+            } else {
+                System.err.println("Could not ascertain package type.");
+            }
+        }
         System.out.println("Done Installing package: " + identifier);
         return true;
+    }
+
+    private static JSONObject readJSONFromFile(File file) {
+        try {
+            String line;
+            StringBuilder builder = new StringBuilder();
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((line = bufferedReader.readLine()) != null) {
+                builder.append(line);
+            }
+            bufferedReader.close();
+            return new JSONObject(builder.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private static boolean inList(String string, List<String> list) {

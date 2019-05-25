@@ -8,12 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SplintUpdate/preferences.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" afterPath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java" afterPath="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/installerX64.iss" afterPath="$PROJECT_DIR$/dist/installerX64.iss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/installerX86.iss" afterPath="$PROJECT_DIR$/dist/installerX86.iss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" afterPath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java" afterPath="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/splint.json" afterPath="$PROJECT_DIR$/splint.json" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,32 +69,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-              <folding>
-                <element signature="method#main#0;class#Main#0" expanded="false" />
-                <element signature="e#1081#1114#0" expanded="false" />
-                <element signature="e#1572#1611#0" expanded="false" />
-                <element signature="e#7947#7987#0" expanded="false" />
-                <element signature="method#installPatch#0;class#Main#0" expanded="false" />
-                <element signature="method#silentDelete#0;class#Main#0" expanded="false" />
-                <element signature="method#downloadFile#0;class#Main#0" expanded="false" />
-                <element signature="method#readJSONFromFile#0;class#Main#0" expanded="false" />
-                <element signature="method#getMD5Checksum#0;class#Main#0" expanded="false" />
-                <element signature="method#printLog#0;class#Main#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="3128">
+              <caret line="196" column="47" lean-forward="true" selection-start-line="196" selection-start-column="47" selection-end-line="196" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Preferences.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Preferences.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="7" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+            <state relative-caret-position="340">
+              <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
               <folding>
                 <element signature="e#1806#1807#0" expanded="true" />
                 <element signature="e#1858#1859#0" expanded="true" />
@@ -109,9 +95,41 @@
       <file leaf-file-name="SplintCore.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="177" column="24" lean-forward="false" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="59" />
+            <state relative-caret-position="240">
+              <caret line="357" column="57" lean-forward="false" selection-start-line="357" selection-start-column="57" selection-end-line="357" selection-end-column="57" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CloudManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-67">
+              <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#262#312#0" expanded="true" />
+                <element signature="e#1906#3373#0" expanded="true" />
+                <element signature="e#3372#3373#0" expanded="true" />
+                <element signature="e#3414#3464#0" expanded="true" />
+                <element signature="e#3612#6016#0" expanded="true" />
+                <element signature="e#6015#6016#0" expanded="true" />
+                <element signature="e#6057#6096#0" expanded="true" />
+                <element signature="e#6248#9400#0" expanded="true" />
+                <element signature="e#9399#9400#0" expanded="true" />
+                <marker date="1558812271137" expanded="false" signature="9444:9483" ph="/ConstantConditions/" />
+                <marker date="1558812271137" expanded="false" signature="10972:10987" ph=" { " />
+                <marker date="1558812271137" expanded="false" signature="10999:11009" ph=" }" />
+                <marker date="1558812271137" expanded="false" signature="11035:11050" ph=" { " />
+                <marker date="1558812271137" expanded="false" signature="11062:11072" ph=" }" />
+                <marker date="1558812271137" expanded="false" signature="11099:11114" ph=" { " />
+                <marker date="1558812271137" expanded="false" signature="11127:11137" ph=" }" />
+                <marker date="1558812271137" expanded="false" signature="11167:11182" ph=" { " />
+                <marker date="1558812271137" expanded="false" signature="11198:11208" ph=" }" />
+                <marker date="1558812271137" expanded="false" signature="11344:11359" ph=" { " />
+                <marker date="1558812271137" expanded="false" signature="11378:11388" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,16 +151,16 @@
       <find>Stream</find>
       <find>stream</find>
       <find>PATCH</find>
-      <find>HttpsURLConnection</find>
       <find>HttpURLConnection</find>
       <find>patchLoader</find>
       <find>printUsage</find>
       <find>specialArgs</find>
+      <find>HttpsURLConnection</find>
     </findStrings>
     <replaceStrings>
       <replace>HashMap</replace>
-      <replace>HttpURLConnection</replace>
       <replace>HttpsURLConnection</replace>
+      <replace>HttpURLConnection</replace>
     </replaceStrings>
   </component>
   <component name="FindManager">
@@ -166,16 +184,16 @@
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/Preferences.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DBContract.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/DataSource.java" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/dist/build.sh" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/ExitCodes.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/ExitCodes.java" />
         <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java" />
-        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java" />
         <option value="$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java" />
+        <option value="$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java" />
       </list>
     </option>
   </component>
@@ -316,6 +334,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SplintGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SplintGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Splint" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="splint" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -363,7 +407,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Splint Update">
+  <component name="RunManager" selected="Application.Splint Install App">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -741,7 +785,22 @@
       <envs />
       <method />
     </configuration>
-    <list size="9">
+    <configuration default="false" name="Splint Install App" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="com.cynobit.splint.Main" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="install francis94c/ci-paystack-app" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Splint" />
+      <envs />
+      <method />
+    </configuration>
+    <list size="10">
       <item index="0" class="java.lang.String" itemvalue="Application.GUI" />
       <item index="1" class="java.lang.String" itemvalue="Application.Splint Command Line Install" />
       <item index="2" class="java.lang.String" itemvalue="Application.List Packages" />
@@ -751,6 +810,7 @@
       <item index="6" class="java.lang.String" itemvalue="Application.New CI Project" />
       <item index="7" class="java.lang.String" itemvalue="Application.Splint Update" />
       <item index="8" class="java.lang.String" itemvalue="Application.Splint Version" />
+      <item index="9" class="java.lang.String" itemvalue="Application.Splint Install App" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -776,7 +836,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -790,7 +849,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1204,13 +1263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/CloudManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1231,49 +1283,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java">
+    <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="196" column="47" lean-forward="true" selection-start-line="196" selection-start-column="47" selection-end-line="196" selection-end-column="47" />
-          <folding />
+        <state relative-caret-position="340">
+          <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+          <folding>
+            <element signature="e#1806#1807#0" expanded="true" />
+            <element signature="e#1858#1859#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/models/CloudManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-67">
+          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#262#312#0" expanded="true" />
+            <element signature="e#1906#3373#0" expanded="true" />
+            <element signature="e#3372#3373#0" expanded="true" />
+            <element signature="e#3414#3464#0" expanded="true" />
+            <element signature="e#3612#6016#0" expanded="true" />
+            <element signature="e#6015#6016#0" expanded="true" />
+            <element signature="e#6057#6096#0" expanded="true" />
+            <element signature="e#6248#9400#0" expanded="true" />
+            <element signature="e#9399#9400#0" expanded="true" />
+            <marker date="1558812271137" expanded="false" signature="9444:9483" ph="/ConstantConditions/" />
+            <marker date="1558812271137" expanded="false" signature="10972:10987" ph=" { " />
+            <marker date="1558812271137" expanded="false" signature="10999:11009" ph=" }" />
+            <marker date="1558812271137" expanded="false" signature="11035:11050" ph=" { " />
+            <marker date="1558812271137" expanded="false" signature="11062:11072" ph=" }" />
+            <marker date="1558812271137" expanded="false" signature="11099:11114" ph=" { " />
+            <marker date="1558812271137" expanded="false" signature="11127:11137" ph=" }" />
+            <marker date="1558812271137" expanded="false" signature="11167:11182" ph=" { " />
+            <marker date="1558812271137" expanded="false" signature="11198:11208" ph=" }" />
+            <marker date="1558812271137" expanded="false" signature="11344:11359" ph=" { " />
+            <marker date="1558812271137" expanded="false" signature="11378:11388" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/SplintCore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="177" column="24" lean-forward="false" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="59" />
+        <state relative-caret-position="240">
+          <caret line="357" column="57" lean-forward="false" selection-start-line="357" selection-start-column="57" selection-end-line="357" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        <state relative-caret-position="2108">
+          <caret line="320" column="13" lean-forward="false" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
           <folding>
-            <element signature="method#main#0;class#Main#0" expanded="false" />
             <element signature="e#1081#1114#0" expanded="false" />
             <element signature="e#1572#1611#0" expanded="false" />
-            <element signature="e#7947#7987#0" expanded="false" />
             <element signature="method#installPatch#0;class#Main#0" expanded="false" />
-            <element signature="method#silentDelete#0;class#Main#0" expanded="false" />
             <element signature="method#downloadFile#0;class#Main#0" expanded="false" />
-            <element signature="method#readJSONFromFile#0;class#Main#0" expanded="false" />
             <element signature="method#getMD5Checksum#0;class#Main#0" expanded="false" />
             <element signature="method#printLog#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SplintUpdate/src/com/cynobit/splint_update/models/Preferences.java">
+    <entry file="file://$PROJECT_DIR$/Splint/src/com/cynobit/splint/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="7" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-          <folding>
-            <element signature="e#1806#1807#0" expanded="true" />
-            <element signature="e#1858#1859#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="3128">
+          <caret line="196" column="47" lean-forward="true" selection-start-line="196" selection-start-column="47" selection-end-line="196" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

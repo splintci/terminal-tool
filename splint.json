@@ -1,1 +1,5 @@
-{"install": ["francis94c/ci-preference"]}
+{"install": [
+  "francis94c/ci-paystack",
+  "francis94c/ci-paystack-app",
+  "francis94c/ci-preference"
+]}
