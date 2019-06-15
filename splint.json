@@ -1,5 +1,10 @@
 {"install": [
+  "francis94c/blog",
+  "francis94c/blogger",
+  "francis94c/cdn-helper",
+  "francis94c/ci-parsedown",
   "francis94c/ci-paystack",
   "francis94c/ci-paystack-app",
-  "francis94c/ci-preference"
+  "francis94c/ci-preference",
+  "francis94c/toast"
 ]}

@@ -147,8 +147,8 @@ public class Main {
                                 dependencies.remove(_package);
                             }
                         }
-                        dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                         installedPackages.addAll(dependencies);
+                        dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                     }
                     System.out.println("Updating Splint File...");
                     SplintCore.refreshRootSplintJSONFile();
@@ -182,8 +182,8 @@ public class Main {
                                 dependencies.remove(_package);
                             }
                         }
-                        dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                         installedPackages.addAll(dependencies);
+                        dependencies = SplintCore.getDependencies(SplintCore.installPackages(dependencies));
                     }
                     System.out.println("Updating Splint File...");
                     SplintCore.refreshRootSplintJSONFile();
